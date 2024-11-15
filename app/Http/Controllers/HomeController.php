@@ -27,6 +27,6 @@ class HomeController extends Controller
     }
     public function login()
     {
-        return view('auth.passwords.login');
+        return view('auth.login');
     }
 }

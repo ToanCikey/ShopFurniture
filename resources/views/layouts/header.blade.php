@@ -1,18 +1,17 @@
 <div class="container">
     <div class="navbar-top">
         <div class="social-link">
-            <i><img src="{{ asset('asset/image/twitter.png') }}" alt="" width="30px"></i>
-            <i><img src="{{ asset('asset/image/facebook.png') }}" alt="" width="30px"></i>
-            <i><img src="{{ asset('asset/image/google-plus.png') }}" alt="" width="30px"></i>
+            <i><img src="{{ asset('assets/image/twitter.png') }}" alt="" width="30px"></i>
+            <i><img src="{{ asset('assets/image/facebook.png') }}" alt="" width="30px"></i>
+            <i><img src="{{ asset('assets/image/google-plus.png') }}" alt="" width="30px"></i>
         </div>
         <div class="logo">
             <h3>FURNITURE</h3>
         </div>
         <div class="icons">
-            <i><img src="{{ asset('asset/image/search.png') }}" alt="" width="20px"></i>
-            <i><img src="{{ asset('asset/image/heart.png') }}" alt="" width="20px"></i>
-            <i><img src="{{ asset('asset/image/shopping-cart.png') }}" alt="" width="25px"></i>
-            <!-- Đóng thẻ img đúng cách -->
+            <i><img src="{{ asset('assets/image/search.png') }}" alt="" width="20px"></i>
+            <i><img src="{{ asset('assets/image/heart.png') }}" alt="" width="20px"></i>
+            <i><img src="{{ asset('assets/image/shopping-cart.png') }}" alt="" width="25px"></i>
         </div>
     </div>
 </div>
@@ -42,12 +41,13 @@
                         <a class="nav-link" href="#">Brands</a>
                     </li>
                     <li class="nav-item">
-                        @guest
-                        <a class="nav-link" href="{{route('login')}}">Login</a>
+                        <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
+                        <!-- @guest
+                        <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
                         @else
                         <a class="nav-link"
                             href="{{ Auth::user()->role== 'ADM' ? route('admin.index') : route('user.account.dashboard') }}">Login</a>
-                        @endguest
+                        @endguest -->
                     </li>
                 </ul>
             </div>

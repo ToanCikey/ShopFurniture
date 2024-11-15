@@ -22,11 +22,11 @@ class AuthAdmin
                 return $next($request);
             } else {
                 session()->flush();
-                return redirect()->route('login-auth');
+                return redirect()->route('home.index');
             }
         } else {
             session()->flush();
-            return redirect()->route('home.index');
+            return redirect()->route('auth.login');
         }
     }
 }

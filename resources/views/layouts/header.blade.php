@@ -48,6 +48,16 @@
                         <a class="nav-link"
                             href="{{ Auth::user()->role== 'ADM' ? route('admin.index') : route('user.account.dashboard') }}">Login</a>
                         @endguest -->
+                        <!-- @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
+                    </li>
+                    @else
+                    <li class="nav-item">
+                        <form action="{{ route('auth.logout') }}" method="POST" style="display: inline;">
+                        </form>
+                    </li>
+                    @endguest -->
                     </li>
                 </ul>
             </div>

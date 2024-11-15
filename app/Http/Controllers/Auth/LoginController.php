@@ -4,37 +4,49 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function login(Request $request)
     {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $credentials = [
+            'email' => $request->username,
+            'password' => $request->password,
+        ];
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->role === 'ADM') {
+                return redirect()->route('admin.index');
+            }
+            return redirect()->route('home.index');
+        }
+        return back()->withErrors([
+            'username' => 'Thông tin đăng nhập không chính xác.',
+        ])->withInput($request->only('username'));
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Đăng xuất người dùng
+
+        // Xóa phiên làm việc (session)
+        $request->session()->invalidate();
+
+        // Regenerate session ID
+        $request->session()->regenerateToken();
+
+        // Chuyển hướng về trang chủ hoặc trang đăng nhập
+        return redirect()->route('home.index')->with('success', 'Bạn đã đăng xuất thành công!');
     }
 }

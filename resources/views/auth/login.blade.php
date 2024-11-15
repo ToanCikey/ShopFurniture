@@ -20,26 +20,32 @@
                 <div class="text-center mb-5 text-dark">Made with bootstrap</div>
                 <div class="card my-5">
 
-                    <form class="card-body cardbody-color p-lg-5">
-
+                    <form class="card-body cardbody-color p-lg-5" method="POST" action="{{route('auth.login.submit')}}">
+                        @csrf
                         <div class="text-center">
                             <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
                                 class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px"
                                 alt="profile">
                         </div>
-
+                        @if ($errors->has('username'))
+                        <div class="alert alert-danger">{{ $errors->first('username') }}</div>
+                        @endif
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="Username" aria-describedby="emailHelp"
-                                placeholder="UserName">
+                            <input type="text" class="form-control" name="username" id="Username"
+                                aria-describedby="emailHelp" placeholder="UserName">
                         </div>
+                        @if ($errors->has('password'))
+                        <div class="alert alert-danger">{{ $errors->first('password') }}</div>
+                        @endif
                         <div class="mb-3">
-                            <input type="password" class="form-control" id="password" placeholder="PassWord">
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="PassWord">
                         </div>
                         <div class="text-center"><button type="submit"
                                 class="btn btn-color btn-primary px-5 mb-5 w-100">Login</button>
                         </div>
                         <div id="emailHelp" class="form-text text-center mb-5 text-dark">Not
-                            Registered? <a href="#" class="text-dark fw-bold"> Create an
+                            Registered? <a href="{{route('auth.register')}}" class="text-dark fw-bold"> Create an
                                 Account</a>
                         </div>
                     </form>

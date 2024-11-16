@@ -19,7 +19,7 @@
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-4 py-3 py-md-0">
             <div class="card">
-                <img src="./image/c1.png" alt="" class="card image-top" height="200px">
+                <img src="{{asset('assets/image/c1.png')}}" alt="" class="card image-top" height="200px">
                 <div class="card-body">
                     <h5 class="card-titel text-center">CUSTOM MENUS</h5>
                     <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam
@@ -30,7 +30,7 @@
         </div>
         <div class="col-md-4 py-3 py-md-0">
             <div class="card">
-                <img src="./image/c2.png" alt="" class="card image-top" height="200px">
+                <img src="{{asset('assets/image/c2.png')}}" alt="" class="card image-top" height="200px">
                 <div class="card-body">
                     <h5 class="card-titel text-center">SMARTEST WAY</h5>
                     <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam
@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-4 py-3 py-md-0">
             <div class="card">
-                <img src="./image/c3.png" alt="" class="card image-top" height="200px">
+                <img src="{{asset('assets/image/c3.png')}}" alt="" class="card image-top" height="200px">
                 <div class="card-body">
                     <h5 class="card-titel text-center">USER FRIENDLEY</h5>
                     <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam
@@ -59,7 +59,7 @@
     <div class="row" style="margin-top: 100px;">
         <div class="col-md-4 py-3 py-md-0">
             <div class="card" id="tpc">
-                <img src="./image/ch.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/ch.png')}}" alt="" class="card image-top">
                 <div class="card-img-overlay">
                     <h4 class="card-titel">Best Chair</h4>
                     <p class="card-text">Lorem ipsum dolor.</p>
@@ -69,7 +69,7 @@
         </div>
         <div class="col-md-4 py-3 py-md-0">
             <div class="card" id="tpc">
-                <img src="./image/sf.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/sf.png')}}" alt="" class="card image-top">
                 <div class="card-img-overlay">
                     <h4 class="card-titel">Sofa</h4>
                     <p class="card-text">Lorem ipsum dolor.</p>
@@ -79,7 +79,7 @@
         </div>
         <div class="col-md-4 py-3 py-md-0">
             <div class="card" id="tpc">
-                <img src="./image/work desk.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/work desk.png')}}" alt="" class="card image-top">
                 <div class="card-img-overlay">
                     <h4 class="card-titel">Work Desk</h4>
                     <p class="card-text">Lorem ipsum dolor.</p>
@@ -97,7 +97,7 @@
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-3 py-3 py-md-0">
             <div class="card" id="c">
-                <img src="./image/card1.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/card1.png')}}" alt="" class="card image-top">
                 <div class="card-body">
                     <h3 class="card-titel text-center">Best Sofa</h3>
                     <p class="card-text text-center">$1000.50</p>
@@ -108,7 +108,7 @@
 
         <div class="col-md-3 py-3 py-md-0">
             <div class="card" id="c">
-                <img src="./image/card2.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/card2.png')}}" alt="" class="card image-top">
                 <div class="card-body">
                     <h3 class="card-titel text-center">New Sofa</h3>
                     <p class="card-text text-center">$100.50</p>
@@ -119,7 +119,7 @@
         <div class="col-md-3 py-3 py-md-0">
 
             <div class="card" id="c">
-                <img src="./image/card3.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/card3.png')}}" alt="" class="card image-top">
                 <div class="card-body">
                     <h3 class="card-titel text-center">New Chair</h3>
                     <p class="card-text text-center">$300.20</p>
@@ -129,7 +129,7 @@
         </div>
         <div class="col-md-3 py-3 py-md-0">
             <div class="card" id="c">
-                <img src="./image/card4.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/card4.png')}}" alt="" class="card image-top">
                 <div class="card-body">
                     <h3 class="card-titel text-center">Modern Chair</h3>
                     <p class="card-text text-center">$500.50</p>
@@ -144,7 +144,7 @@
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-3 py-3 py-md-0">
             <div class="card" id="c">
-                <img src="./image/card5.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/card5.png')}}" alt="" class="card image-top">
                 <div class="card-body">
                     <h3 class="card-titel text-center">Best Sofa</h3>
                     <p class="card-text text-center">$200.50</p>
@@ -154,7 +154,7 @@
         </div>
         <div class="col-md-3 py-3 py-md-0">
             <div class="card" id="c">
-                <img src="./image/card6.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/card6.png')}}" alt="" class="card image-top">
                 <div class="card-body">
                     <h3 class="card-titel text-center">Sofa Chair</h3>
                     <p class="card-text text-center">$100.50</p>
@@ -164,7 +164,7 @@
         </div>
         <div class="col-md-3 py-3 py-md-0">
             <div class="card" id="c">
-                <img src="./image/card1.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/card1.png')}}" alt="" class="card image-top">
                 <div class="card-body">
                     <h3 class="card-titel text-center">Table Chair</h3>
                     <p class="card-text text-center">$150.50</p>
@@ -174,7 +174,7 @@
         </div>
         <div class="col-md-3 py-3 py-md-0">
             <div class="card" id="c">
-                <img src="./image/card1.png" alt="" class="card image-top">
+                <img src="{{asset('assets/image/card1.png')}}" alt="" class="card image-top">
                 <div class="card-body">
                     <h3 class="card-titel text-center">Hanging Chair</h3>
                     <p class="card-text text-center">$500.60</p>
@@ -192,7 +192,7 @@
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-6 py-3 py-md-0">
             <div class="card">
-                <img src="./image/about.png" alt="">
+                <img src="{{asset('assets/image/about.png')}}" alt="">
             </div>
         </div>
         <div class="col-md-6 py-3 py-md-0">

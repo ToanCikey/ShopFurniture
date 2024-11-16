@@ -17,6 +17,12 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+            'email' => 'required|string|email|unique:users,email'
+        ]);
+
         // Xác thực dữ liệu
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:225',

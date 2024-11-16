@@ -23,7 +23,13 @@
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-
+                                    @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li> @endforeach
+                                        </ul>
+                                    </div> @endif
                                     <form class="mx-1 mx-md-4" method="POST"
                                         action="{{ route('auth.register.submit')}}">
                                         @csrf

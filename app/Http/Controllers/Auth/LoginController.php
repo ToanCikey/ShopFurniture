@@ -38,15 +38,9 @@ class LoginController extends Controller
     }
     public function logout(Request $request)
     {
-        Auth::logout(); // Đăng xuất người dùng
-
-        // Xóa phiên làm việc (session)
+        Auth::logout();
         $request->session()->invalidate();
-
-        // Regenerate session ID
         $request->session()->regenerateToken();
-
-        // Chuyển hướng về trang chủ hoặc trang đăng nhập
         return redirect()->route('home.index')->with('success', 'Bạn đã đăng xuất thành công!');
     }
 }

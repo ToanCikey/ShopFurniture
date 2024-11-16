@@ -40,25 +40,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Brands</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
-                        <!-- @guest
-                        <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
-                        @else
-                        <a class="nav-link"
-                            href="{{ Auth::user()->role== 'ADM' ? route('admin.index') : route('user.account.dashboard') }}">Login</a>
-                        @endguest -->
-                        <!-- @guest
+                    </li> -->
+                    @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
                     </li>
                     @else
                     <li class="nav-item">
                         <form action="{{ route('auth.logout') }}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="nav-link"
+                                style="background: none; border: none; color: #0d6efd; cursor: pointer;">Logout</button>
                         </form>
                     </li>
-                    @endguest -->
-                    </li>
+                    @endguest
                 </ul>
             </div>
         </div>

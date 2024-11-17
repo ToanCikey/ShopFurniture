@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('home.index')}}">Home</a> <!-- Sửa lại class cho chính xác -->
+                        <a class="nav-link" href="{{route('index')}}">Home</a> <!-- Sửa lại class cho chính xác -->
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Shop</a>

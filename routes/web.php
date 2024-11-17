@@ -3,6 +3,8 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -16,7 +18,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/login-auth', [HomeController::class, 'login'])->name('auth.login');
 Route::post('/postLogin', [LoginController::class, 'login'])->name('auth.login.submit');
 
@@ -32,3 +34,5 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 });
+Route::get('/', [CategoryController::class, 'index'])->name('index');
+Route::get('/', [ProductController::class, 'index'])->name('index');

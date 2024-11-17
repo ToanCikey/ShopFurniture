@@ -12,13 +12,13 @@ class RegisterController extends Controller
 {
     public function showRegistrationForm()
     {
-        return view('auth.register'); // Đảm bảo rằng bạn có view này
+        return view('auth.register');
     }
 
     public function register(Request $request)
     {
         $request->validate([
-            'username' => 'required|string',
+            'name' => 'required|string',
             'password' => 'required|string',
             'email' => 'required|string|email|unique:users,email'
         ]);
@@ -45,6 +45,6 @@ class RegisterController extends Controller
             'role' => 'USR',
         ]);
 
-        return redirect()->route('home.index')->with('success', 'Đăng ký thành công!');
+        return redirect()->route('index')->with('success', 'Đăng ký thành công!');
     }
 }

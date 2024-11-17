@@ -32,7 +32,7 @@
                         @endif
                         <div class="mb-3">
                             <input type="text" class="form-control" name="username" id="Username"
-                                aria-describedby="emailHelp" placeholder="UserName">
+                                aria-describedby="emailHelp" placeholder="Email">
                         </div>
                         @if ($errors->has('password'))
                         <div class="alert alert-danger">{{ $errors->first('password') }}</div>

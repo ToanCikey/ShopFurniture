@@ -30,7 +30,7 @@ class LoginController extends Controller
             if ($user->role === 'ADM') {
                 return redirect()->route('admin.index');
             }
-            return redirect()->route('home.index');
+            return redirect()->route('index');
         }
         return back()->withErrors([
             'username' => 'Thông tin đăng nhập không chính xác.',
@@ -41,6 +41,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('home.index')->with('success', 'Bạn đã đăng xuất thành công!');
+        return redirect()->route('index')->with('success', 'Bạn đã đăng xuất thành công!');
     }
 }

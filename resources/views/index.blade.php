@@ -57,42 +57,25 @@
 <!-- card2 -->
 <div class="container">
     <div class="row" style="margin-top: 100px;">
+        @foreach ($categories as $category)
         <div class="col-md-4 py-3 py-md-0">
-            <div class="card" id="tpc">
-                <img src="{{asset('assets/image/ch.png')}}" alt="" class="card image-top">
+            <div class="card mb-4" id="tpc">
+                <img src="{{ asset($category->image) }}" alt="" class="card image-top">
+                <!-- <img src="assets/image/categoris/banlamviec.jpg" alt="" class="card image-top"> -->
                 <div class="card-img-overlay">
-                    <h4 class="card-titel">Best Chair</h4>
-                    <p class="card-text">Lorem ipsum dolor.</p>
+                    <h4 class="card-titel">{{ $category->name }}</h4>
+                    <p class="card-text">Lorem ipsum dolor</p>
                     <div id="btn2"><button>View More</button></div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 py-3 py-md-0">
-            <div class="card" id="tpc">
-                <img src="{{asset('assets/image/sf.png')}}" alt="" class="card image-top">
-                <div class="card-img-overlay">
-                    <h4 class="card-titel">Sofa</h4>
-                    <p class="card-text">Lorem ipsum dolor.</p>
-                    <div id="btn2"><button>View More</button></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 py-3 py-md-0">
-            <div class="card" id="tpc">
-                <img src="{{asset('assets/image/work desk.png')}}" alt="" class="card image-top">
-                <div class="card-img-overlay">
-                    <h4 class="card-titel">Work Desk</h4>
-                    <p class="card-text">Lorem ipsum dolor.</p>
-                    <div id="btn2"><button>View More</button></div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 <!-- card2 -->
 
 <!-- card3 -->
-<div class="container">
+<!-- <div class="container">
     <h3 class="text-center" style="margin-top: 50px;">TREANDLY PRODUCTS</h3>
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-3 py-3 py-md-0">
@@ -182,6 +165,25 @@
                 </div>
             </div>
         </div>
+    </div>
+</div> -->
+<div class="container">
+    <h3 class="text-center" style="margin-top: 50px;">TRENDLY PRODUCTS</h3>
+    <div class="row" style="margin-top: 50px;">
+        @foreach ($products as $product)
+        <div class="col-md-3 py-3 py-md-0">
+            <div class="card" id="c">
+                <!-- <img src="{{ asset($product->imageURL) }}" alt="" class="card-image-top"> -->
+                <img src="{{asset($product->productImages->first()->imageURL)}}" alt="" class="card-image-top">
+                <div class="card-body">
+                    <h3 class="card-title text-center">{{ $product->name }}</h3>
+                    <p class="card-text text-center">${{ number_format($product->price) }}</p>
+                    <div id="btn3"><button>Đặt Ngay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
 </div>
 <!-- card3 -->

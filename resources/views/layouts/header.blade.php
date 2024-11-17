@@ -10,8 +10,31 @@
         </div>
         <div class="icons">
             <i><img src="{{ asset('assets/image/search.png') }}" alt="" width="20px"></i>
-            <i><img src="{{ asset('assets/image/heart.png') }}" alt="" width="20px"></i>
             <i><img src="{{ asset('assets/image/shopping-cart.png') }}" alt="" width="25px"></i>
+            <div class="user-icon">
+                <i><img src="{{ asset('assets/image/user.png') }}" alt="" width="20px"></i>
+                <div class="dropdown-menu">
+                    <!-- <ul>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul> -->
+                    <ul>
+                        @guest
+                        <li><a href="{{ route('auth.login') }}">Login</a></li>
+                        @else
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li>
+                            <form action="{{ route('auth.logout') }}" method="POST" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="logout-button">Logout</button>
+                            </form>
+                        </li>
+                        @endguest
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -40,10 +63,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Brands</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
-                    </li> -->
-                    @guest
+                    <li class="nav-item">
+                        <!-- <a class="nav-link" href="{{ route('auth.login') }}">Login</a> -->
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <!-- @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
                     </li>
@@ -55,7 +79,7 @@
                                 style="background: none; border: none; color: #0d6efd; cursor: pointer;">Logout</button>
                         </form>
                     </li>
-                    @endguest
+                    @endguest -->
                 </ul>
             </div>
         </div>

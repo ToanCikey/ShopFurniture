@@ -48,3 +48,5 @@ Route::get('/products/{product}', [ProductController::class, 'detail'])->name('p
 
 //Search
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');
+//Fiter product
+Route::get('/filterProduct', [ProductController::class, 'filterProduct'])->name('products.filterProduct');

@@ -14,16 +14,11 @@
             <div class="user-icon">
                 <i><img src="{{ asset('assets/image/user.png') }}" alt="" width="20px"></i>
                 <div class="dropdown-menu">
-                    <!-- <ul>
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="#">Logout</a></li>
-                    </ul> -->
                     <ul>
                         @guest
                         <li><a href="{{ route('auth.login') }}">Login</a></li>
                         @else
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">{{ Auth::user()->name }}</a></li>
                         <li><a href="#">Settings</a></li>
                         <li>
                             <form action="{{ route('auth.logout') }}" method="POST" style="display: inline;">
@@ -49,10 +44,10 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('index')}}">Home</a> <!-- Sửa lại class cho chính xác -->
+                        <a class="nav-link" href="{{route('index')}}">Trang Chủ</a> <!-- Sửa lại class cho chính xác -->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Shop</a>
+                        <a class="nav-link" href="{{route('products.show')}}">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Top Chair</a>
@@ -64,22 +59,8 @@
                         <a class="nav-link" href="#">Brands</a>
                     </li>
                     <li class="nav-item">
-                        <!-- <a class="nav-link" href="{{ route('auth.login') }}">Login</a> -->
                         <a class="nav-link" href="#">Contact</a>
                     </li>
-                    <!-- @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
-                    </li>
-                    @else
-                    <li class="nav-item">
-                        <form action="{{ route('auth.logout') }}" method="POST" style="display: inline;">
-                            @csrf
-                            <button type="submit" class="nav-link"
-                                style="background: none; border: none; color: #0d6efd; cursor: pointer;">Logout</button>
-                        </form>
-                    </li>
-                    @endguest -->
                 </ul>
             </div>
         </div>

@@ -11,6 +11,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('index');
@@ -36,3 +38,13 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
 });
 Route::get('/', [CategoryController::class, 'index'])->name('index');
 Route::get('/', [ProductController::class, 'index'])->name('index');
+
+//Products
+Route::get('/products', [ProductController::class, 'showProducts'])->name('products.show');
+Route::get('/products/category/{category}', [ProductController::class, 'filterByCategory'])->name('products.filter');
+
+//Detail
+Route::get('/products/{product}', [ProductController::class, 'detail'])->name('products.detail');
+
+//Search
+Route::get('/search', [ProductController::class, 'search'])->name('products.search');

@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="content">
-                <h1 class="name">LD01 LOUNGE CHAIR</h1>
+                <h1 class="name"></h1>
                 <div class="price">200</div>
                 <div class="buttons">
                     <button>Check Out</button>

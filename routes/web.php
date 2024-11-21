@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -50,3 +51,5 @@ Route::get('/products/{product}', [ProductController::class, 'detail'])->name('p
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');
 //Fiter product
 Route::get('/filterProduct', [ProductController::class, 'filterProduct'])->name('products.filterProduct');
+//Detail Blog
+Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');

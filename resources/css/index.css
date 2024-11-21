@@ -10,14 +10,11 @@
     align-items: center;
     text-align: center;
     justify-content: space-between;
-   
 }
-.header{
-    background-color: #949CA5;
+.header {
+    background-color: #949ca5;
 }
 
-
-    
 .navbar-nav .nav-link {
     font-weight: bold;
     font-size: 1rem;
@@ -40,14 +37,14 @@
     border: none;
     color: #000;
     padding: 0;
-    }
+}
 .logout-button:hover {
     color: red;
     text-decoration: underline;
 }
 .banner img {
     height: 90vh; /* Đặt chiều cao của ảnh bằng chiều cao màn hình */
-     /* Đảm bảo ảnh luôn lấp đầy khung hình mà không bị méo */
+    /* Đảm bảo ảnh luôn lấp đầy khung hình mà không bị méo */
 }
 .carousel-inner {
     height: 100vh; /* Chiều cao của vùng carousel */
@@ -96,7 +93,7 @@
 }
 
 /* navbar */
-.nav-item .nav-link{
+.nav-item .nav-link {
     color: #000;
     font-weight: bold;
     font-size: 20px;
@@ -317,8 +314,8 @@
 }
 
 .price {
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 200;
     margin-bottom: 10px;
 }
 
@@ -346,6 +343,15 @@
     text-align: center;
     margin-top: 10px;
 }
+.product-text {
+    display: flex;
+    justify-content: center;
+}
+.material {
+    font-weight: 200;
+    font-size: 1rem;
+    padding-right: 20px;
+}
 
 .add-to-cart,
 .view-more {
@@ -355,6 +361,10 @@
     padding: 10px 20px;
     margin: 10px 0;
     cursor: pointer;
+}
+.view-more a {
+    color: #000;
+    text-decoration: none;
 }
 .col-md-3 {
     transition: border 0.3s ease-in-out;
@@ -393,16 +403,6 @@
     cursor: pointer;
 }
 
-/* .add-to-cart {
-    background-color: #4caf50;  
-    color: white;
-}
-
-.view-more {
-    background-color: #007bff;
-    color: white;
-} */
-
 .btn:hover {
     opacity: 0.8;
 }
@@ -412,166 +412,6 @@
     text-decoration: none;
 }
 
-/* detail */
-/* .containers {
-    max-width: 75%;
-    margin: auto;
-    height: 100vh;
-    margin-top: 5%;
-    background: white;
-    box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.3);
-}
-
-.left,
-.right {
-    width: 50%;
-    padding: 30px;
-}
-
-.flex {
-    display: flex;
-    justify-content: space-between;
-}
-
-.flex1 {
-    display: flex;
-}
-
-.main_image {
-    width: 100%;
-    height: 100%;
-}
-
-.option img {
-    width: 75px;
-    height: 75px;
-    padding: 10px;
-}
-
-.right {
-    padding: 50px 100px 50px 50px;
-}
-
-h3 {
-    color: #af827d;
-    margin: 20px 0 20px 0;
-    font-size: 25px;
-}
-
-h5,
-p,
-small {
-    color: #837d7c;
-}
-
-h4 {
-    color: red;
-}
-
-p {
-    margin: 20px 0 50px 0;
-    line-height: 25px;
-}
-
-h5 {
-    font-size: 15px;
-}
-
-label,
-.add span,
-.color span {
-    width: 25px;
-    height: 25px;
-    background: #000;
-    border-radius: 50%;
-    margin: 20px 10px 20px 0;
-}
-
-.color span:nth-child(2) {
-    background: #ededed;
-}
-
-.color span:nth-child(3) {
-    background: #d5d6d8;
-}
-
-.color span:nth-child(4) {
-    background: #efe0de;
-}
-
-.color span:nth-child(5) {
-    background: #ab8ed1;
-}
-
-.color span:nth-child(6) {
-    background: #f04d44;
-}
-
-.add label,
-.add span {
-    background: none;
-    border: 1px solid #c1908b;
-    color: #c1908b;
-    text-align: center;
-    line-height: 25px;
-}
-
-.add label {
-    padding: 10px 30px 0 20px;
-    border-radius: 50px;
-    line-height: 0;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    outline: none;
-    background: #c1908b;
-    color: white;
-    margin-top: 20%;
-    border-radius: 30px;
-}
-
-@media only screen and (max-width: 768px) {
-    .container {
-        max-width: 90%;
-        margin: auto;
-        height: auto;
-    }
-
-    .left,
-    .right {
-        width: 100%;
-    }
-
-    .container {
-        flex-direction: column;
-    }
-}
-
-@media only screen and (max-width: 511px) {
-    .container {
-        max-width: 100%;
-        height: auto;
-        padding: 10px;
-    }
-
-    .left,
-    .right {
-        padding: 0;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-    }
-
-    .option {
-        display: flex;
-        flex-wrap: wrap;
-    }
-} */
 container {
     width: 900px;
     margin: auto;
@@ -712,51 +552,7 @@ container {
         justify-content: center;
     }
 }
-/* .image {
-    position: relative;
-}
 
-.image img {
-    width: 100%;
-    display: block;
-}
-
-.small-images {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-}
-
-.small-images img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border: 1px solid #ddd;
-    cursor: pointer;
-}
-
-.small-images img:hover {
-    opacity: 0.8;
-}
-
-.similar-products {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-
-.small-img {
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
-    border: 1px solid #ddd;
-}
-
-.small-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-} */
 .image {
     position: relative;
 }
@@ -807,4 +603,71 @@ container {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+/* Danh muc */
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 90px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.category {
+    text-align: center;
+    width: 150px;
+}
+.category img:hover {
+    transform: scale(1.05); /* Slightly enlarge the image */
+}
+
+.category img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.category h3 {
+    font-size: 16px;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.category p {
+    font-size: 14px;
+    color: #666;
+}
+/* pagination */
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination li a,
+.pagination li span {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination li a:hover,
+.pagination li span.current {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
 }

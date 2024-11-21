@@ -4,28 +4,33 @@
     <div class="banner">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="{{asset('assets/image/home/slider_5.png')}}" class="d-block w-100 " alt="Slider 1">
-              </div>
-              <div class="carousel-item">
-                <img src="{{asset('assets/image/home/slider_6.png')}}" class="d-block w-100" alt="Slider 2">
-              </div>
-              <div class="carousel-item">
-                <img src="{{asset('assets/image/home/slider_3.png')}}" class="d-block w-100" alt="Slider 3">
-              </div>
+                <div class="carousel-item active">
+                    <img src="{{asset('assets/image/home/slider_5.png')}}" class="d-block w-100 " alt="Slider 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{asset('assets/image/home/slider_6.png')}}" class="d-block w-100" alt="Slider 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{asset('assets/image/home/slider_3.png')}}" class="d-block w-100" alt="Slider 3">
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </button>
         </div>
     </div>
@@ -35,52 +40,35 @@
 
 <!-- card1 -->
 <div class="container">
-    <h3 class="text-center" style="padding-top: 30px;">SERVICES WE OFFER</h3>
+    <h3 class="text-center" style="padding-top: 30px;">TIN TỨC</h3>
     <div class="row" style="margin-top: 50px;">
+        @foreach ($blogs as $blog)
         <div class="col-md-4 py-3 py-md-0">
             <div class="card">
-                <img src="{{asset('assets/image/c1.png')}}" alt="" class="card image-top" height="200px">
+                <img src="{{ $blog->image }}" alt="" class="card image-top" style="height: 200px;">
                 <div class="card-body">
-                    <h5 class="card-titel text-center">CUSTOM MENUS</h5>
-                    <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam
-                        vitae facere eius modi iure possimus, soluta ea inventore. Omnis!</p>
-                    <div id="btn2" class="text-center"><button>View More</button></div>
+                    <!-- <h5 class="card-titel text-center">{{ $blog->description }}</h5> -->
+                    <p style="padding-left: 14px;">{{$blog->date}}</p>
+                    <p class="text-center">{{ $blog->description }}</p>
+                    <div id="btn2" class="text-center">
+                        <button><a href="{{ route('blogs.show', $blog->id) }}" style="color: black; 
+                        text-decoration: none;">Xem Thêm</a></button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 py-3 py-md-0">
-            <div class="card">
-                <img src="{{asset('assets/image/c2.png')}}" alt="" class="card image-top" height="200px">
-                <div class="card-body">
-                    <h5 class="card-titel text-center">SMARTEST WAY</h5>
-                    <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam
-                        vitae facere eius modi iure possimus, soluta ea inventore. Omnis!</p>
-                    <div id="btn2" class="text-center"><button>View More</button></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 py-3 py-md-0">
-            <div class="card">
-                <img src="{{asset('assets/image/c3.png')}}" alt="" class="card image-top" height="200px">
-                <div class="card-body">
-                    <h5 class="card-titel text-center">USER FRIENDLEY</h5>
-                    <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam
-                        vitae facere eius modi iure possimus, soluta ea inventore. Omnis!</p>
-                    <div id="btn2" class="text-center"><button>View More</button></div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 <!-- card1 -->
 
 <!-- card2 -->
 <div class="container">
-    <div class="row" style="margin-top: 100px;">
+    <!-- <div class="row" style="margin-top: 100px;">
         @foreach ($categories as $category)
         <div class="col-md-4 py-3 py-md-0">
             <div class="card mb-4" id="tpc">
-                <img src="{{ asset($category->image) }}" alt="" class="card image-top">
+                <img src="{{ asset($category->image) }}" alt="" class="card image-top" style="height: 250px;">
                 <div class="card-img-overlay">
                     <h4 class="card-titel">{{ $category->name }}</h4>
                     <p class="card-text">Lorem ipsum dolor</p>
@@ -89,14 +77,23 @@
             </div>
         </div>
         @endforeach
+    </div> -->
+    <h3 class="text-center" style="margin-top: 50px;">DANH MỤC</h3>
+    <div class="categories">
+        @foreach ($categories as $category)
+        <div class="category">
+            <img src="{{ asset($category->image) }}" alt="{{ $category->name }}">
+            <h3>{{ $category->name }}</h3>
+        </div>
+        @endforeach
     </div>
 </div>
 <!-- card2 -->
 
 <!-- card3 -->
 <div class="container">
-    <h3 class="text-center" style="margin-top: 50px;">TRENDLY PRODUCTS</h3>
-    <div class="row" style="margin-top: 50px;">
+    <h3 class="text-center" style="margin-top: 50px;">SẢN PHẨM XU HƯỚNG</h3>
+    <div class="row" style="margin-top: 50px; width: 100%;">
         @foreach ($products as $product)
         <div class="col-md-3 show-border">
             <a href="{{ route('products.detail', $product->id) }}" class="text-decoration-none text-dark">
@@ -105,15 +102,20 @@
                 </div>
                 <div class="product-info">
                     <h3>{{ $product->name }}</h3>
-                    <p class="price">{{ number_format($product->price) }} VND</p>
+                    <div class="product-text">
+                        <p class="material">Chất liệu: {{ $product->material }}</p>
+                        <p class="price" style="font-weight: 200;">{{ number_format($product->price) }} VND</p>
+                    </div>
                     <button class="add-to-cart">THÊM VÀO GIỎ</button>
-                    <!-- <button class="view-more">XEM THÊM</button> -->
-                    <a href="{{ route('products.detail', $product->id) }}" class="btn view-more">XEM THÊM</a>
+                    <button class="view-more">
+                        <a href="{{ route('products.detail', $product->id) }}">XEM THÊM</a>
+                    </button>
+
                 </div>
         </div>
         @endforeach
     </div>
-    <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
+    {{ $products->links() }}
 </div>
 <!-- card3 -->
 

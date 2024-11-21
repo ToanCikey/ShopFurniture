@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductImage;
+use App\Models\Blog;
 
 class ProductController extends Controller
 {
@@ -15,8 +16,9 @@ class ProductController extends Controller
         $products = Product::with(['productImages' => function ($query) {
             $query->where('isPrimary', '1');
         }, 'category'])->paginate(8); //->get();
+        $blogs = Blog::all();
 
-        return view('index', compact('products', 'categories'));
+        return view('index', compact('products', 'categories', 'blogs'));
     }
     public function productImages()
     {
@@ -27,7 +29,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $products = Product::with(['productImages' => function ($query) {
             $query->where('isPrimary', '1');
-        }, 'category'])->paginate(8);
+        }, 'category'])->paginate(9);
         return view('products.show', compact('products', 'categories'));
     }
     public function filterByCategory($categoryId)
@@ -43,19 +45,6 @@ class ProductController extends Controller
         $product = Product::with('productImages')->findOrFail($id);
         return view('products.detail', compact('product'));
     }
-    // public function search(Request $request)
-    // {
-    //     $query = $request->input('query');
-
-    //     if (empty($query)) {
-    //         return redirect()->route('products.show')->with('message', 'Vui lòng nhập từ khóa tìm kiếm.');
-    //     }
-
-    //     $products = Product::where('name', 'LIKE', "%{$query}%")->paginate(8);
-    //     $categories = Category::all();
-
-    //     return view('products.show', compact('products', 'categories'));
-    // }
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -71,31 +60,6 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('products.show', compact('products', 'categories'));
     }
-    // public function filterProduct(Request $request)
-    // {
-    //     $sort_price_asc = $request->input('sort_price_asc');
-    //     $sort_price_desc = $request->input('sort_price_desc');
-    //     $sort_name_asc = $request->input('sort_name_asc');
-    //     $sort_name_desc = $request->input('sort_name_desc');
-
-    //     $products = Product::query();
-    //     if ($sort_price_asc) {
-    //         $products = $products->orderBy('price', 'asc');
-    //     }
-    //     if ($sort_price_desc) {
-    //         $products = $products->orderBy('price', 'desc');
-    //     }
-    //     if ($sort_name_asc) {
-    //         $products = $products->orderBy('name', 'asc');
-    //     }
-    //     if ($sort_name_desc) {
-    //         $products = $products->orderBy('name', 'desc');
-    //     }
-    //     $products = $products->paginate(8);
-    //     $categories = Category::all();
-
-    //     return view('products.show', compact('products', 'categories'));
-    // }
     public function filterProduct(Request $request)
     {
         $categoryIds = $request->input('categories', []);

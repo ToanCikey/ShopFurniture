@@ -1,68 +1,65 @@
-<div class="container">
-    <div class="navbar-top">
-        <div class="social-link">
-            <i><img src="{{ asset('assets/image/twitter.png') }}" alt="" width="30px"></i>
-            <i><img src="{{ asset('assets/image/facebook.png') }}" alt="" width="30px"></i>
-            <i><img src="{{ asset('assets/image/google-plus.png') }}" alt="" width="30px"></i>
-        </div>
+<div class="container-fluid header text-white py-2">
+    <div class="d-flex justify-content-between align-items-center">
+        <!-- Logo -->
         <div class="logo">
-            <h3>FURNITURE</h3>
+            <h3 class="m-0 fw-bold  text-black">FURNITURE</h3>
         </div>
-        <div class="icons">
-            <i><img src="{{ asset('assets/image/search.png') }}" alt="" width="20px"></i>
-            <i><img src="{{ asset('assets/image/shopping-cart.png') }}" alt="" width="25px"></i>
-            <div class="user-icon">
-                <i><img src="{{ asset('assets/image/user.png') }}" alt="" width="20px"></i>
-                <div class="dropdown-menu">
-                    <ul>
-                        @guest
-                        <li><a href="{{ route('auth.login') }}">Login</a></li>
-                        @else
-                        <li><a href="#">{{ Auth::user()->name }}</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li>
-                            <form action="{{ route('auth.logout') }}" method="POST" style="display: inline;">
-                                @csrf
-                                <button type="submit" class="logout-button">Logout</button>
-                            </form>
-                        </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="main-content">
-    <nav class="navbar navbar-expand-md" id="navbar-color">
-        <div class="container">
-            <!-- Toggler/collapsibe Button -->
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                <span><i><img src="./image/menu.png" alt="" width="30px"></i></span>
+                <span><img src="./image/menu.png" alt="Menu" width="30px"></span>
             </button>
-            <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('index')}}">Trang Chủ</a> <!-- Sửa lại class cho chính xác -->
+                        <a class="nav-link text-white fw-bold px-3" href="{{route('index')}}">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('products.show')}}">Sản Phẩm</a>
+                        <a class="nav-link text-white fw-bold px-3" href="{{route('products.show')}}">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Top Chair</a>
+                        <a class="nav-link text-white fw-bold px-3" href="#">Top Chair</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Chair</a>
+                        <a class="nav-link text-white fw-bold px-3" href="#">Chair</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Brands</a>
+                        <a class="nav-link text-white fw-bold px-3" href="#">Brands</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link text-white fw-bold px-3" href="#">Contact</a>
                     </li>
                 </ul>
             </div>
+        </nav>
+
+        <!-- Icons -->
+        <div class="icons d-flex align-items-center">
+            <a href="#" class="text-white mx-2">
+                <img src="{{ asset('assets/image/search.png') }}" alt="Search" width="20px">
+            </a>
+            <a href="#" class="text-white mx-2">
+                <img src="{{ asset('assets/image/shopping-cart.png') }}" alt="Cart" width="25px">
+            </a>
+            <div class="dropdown">
+                <div  class="text-black mx-2 dropdown-toggle" data-bs-toggle="dropdown">
+                    <img src="{{ asset('assets/image/user.png') }}" alt="User" width="20px">
+                </div>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    @guest
+                    <li><a class="dropdown-item" href="{{ route('auth.login') }}">Login</a></li>
+                    @else
+                    <li><a class="dropdown-item" href="#">{{ Auth::user()->name }}</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li>
+                        <form action="{{ route('auth.logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </li>
+                    @endguest
+                </ul>
+            </div>
         </div>
-    </nav>
+    </div>
 </div>

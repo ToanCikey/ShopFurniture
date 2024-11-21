@@ -10,7 +10,49 @@
     align-items: center;
     text-align: center;
     justify-content: space-between;
+   
 }
+.header{
+    background-color: #949CA5;
+}
+
+
+    
+.navbar-nav .nav-link {
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+.navbar-nav .nav-link:hover {
+    color: #000; /* Đổi màu chữ khi hover */
+}
+.icons img {
+    transition: transform 0.3s;
+}
+.icons img:hover {
+    transform: scale(1.2); /* Phóng to khi hover */
+}
+.dropdown-menu {
+    min-width: 150px;
+}
+.logout-button {
+    background: none;
+    border: none;
+    color: #000;
+    padding: 0;
+    }
+.logout-button:hover {
+    color: red;
+    text-decoration: underline;
+}
+.banner img {
+    height: 90vh; /* Đặt chiều cao của ảnh bằng chiều cao màn hình */
+     /* Đảm bảo ảnh luôn lấp đầy khung hình mà không bị méo */
+}
+.carousel-inner {
+    height: 100vh; /* Chiều cao của vùng carousel */
+}
+
 .social-link i img {
     margin-left: 10px;
     transition: 0.5s ease;
@@ -54,8 +96,10 @@
 }
 
 /* navbar */
-#navbar-color {
-    background-color: rgba(238, 224, 208);
+.nav-item .nav-link{
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
 }
 .navbar-nav {
     margin: auto;

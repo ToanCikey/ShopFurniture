@@ -12,11 +12,11 @@
                 </div>
             </div>
             <div class="content">
-                <h1 class="name"></h1>
-                <div class="price">200</div>
+                <h1 class="name">{{ $product->name }}</h1>
+                <div class="price">{{ number_format($product->price) }} VND</div>
                 <div class="buttons">
-                    <button>Check Out</button>
-                    <button>Add To Cart
+                    <button><a class="custom-a" href="/">Trờ về</a></button>
+                    <button>Thêm Vào Giỏ
                         <span>
                             <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 18 20">
@@ -27,14 +27,11 @@
                         </span>
                     </button>
                 </div>
+
                 <div class="description">
-                    Expertly rendered by Carl Hansen & Søn, the lounge chair—first introduced in 1951 and enduring ever
-                    since—is available in oak or as a combination of oak and walnut, sourced from sustainable forestry.
-                    Choose from seat and back upholstery in a selection of leather options or in a custom fabric."
+                    {{ $product->detailDescription}}
                 </div>
             </div>
         </div>
-
-        <div class="title">Similar product</div>
-        <div class="listProduct"></div>
         @endsection
+    </div>

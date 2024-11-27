@@ -64,20 +64,6 @@
 
 <!-- card2 -->
 <div class="container">
-    <!-- <div class="row" style="margin-top: 100px;">
-        @foreach ($categories as $category)
-        <div class="col-md-4 py-3 py-md-0">
-            <div class="card mb-4" id="tpc">
-                <img src="{{ asset($category->image) }}" alt="" class="card image-top" style="height: 250px;">
-                <div class="card-img-overlay">
-                    <h4 class="card-titel">{{ $category->name }}</h4>
-                    <p class="card-text">Lorem ipsum dolor</p>
-                    <div id="btn2"><button>View More</button></div>
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div> -->
     <h3 class="text-center" style="margin-top: 50px;">DANH MỤC</h3>
     <div class="categories">
         @foreach ($categories as $category)
@@ -91,6 +77,35 @@
 <!-- card2 -->
 
 <!-- card3 -->
+<!-- <div class="container">
+    <h3 class="text-center" style="margin-top: 50px;">SẢN PHẨM XU HƯỚNG</h3>
+    <div class="row" style="margin-top: 50px; width: 100%;">
+        @foreach ($products as $product)
+        <div class="col-md-3 show-border">
+            <a href="{{ route('products.detail', $product->id) }}" class="text-decoration-none text-dark">
+                <div class="product-image">
+                    <img src="{{asset($product->productImages->first()->imageURL)}}" alt="Tủ áo Maxine">
+                </div>
+                <div class="product-info">
+                    <h3>{{ $product->name }}</h3>
+                    <div class="product-text">
+                        <p class="material">Chất liệu: {{ $product->material }}</p>
+                        <p class="price" style="font-weight: 200;">Giá: {{ number_format($product->price) }} VND</p>
+                    </div>
+                    <button class="add-to-cart">THÊM
+                        VÀO GIỎ</button>
+                    <button class="view-more">
+                        <a href="{{ route('products.detail', $product->id) }}">XEM THÊM</a>
+                    </button>
+
+                </div>
+            </a>
+
+        </div>
+        @endforeach
+    </div>
+    {{ $products->links() }}
+</div> -->
 <div class="container">
     <h3 class="text-center" style="margin-top: 50px;">SẢN PHẨM XU HƯỚNG</h3>
     <div class="row" style="margin-top: 50px; width: 100%;">
@@ -104,14 +119,14 @@
                     <h3>{{ $product->name }}</h3>
                     <div class="product-text">
                         <p class="material">Chất liệu: {{ $product->material }}</p>
-                        <p class="price" style="font-weight: 200;">{{ number_format($product->price) }} VND</p>
+                        <p class="price" style="font-weight: 200;">Giá: {{ number_format($product->price) }} VND</p>
                     </div>
-                    <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                    <button class="add-to-cart" type="button">THÊM VÀO GIỎ</button>
                     <button class="view-more">
                         <a href="{{ route('products.detail', $product->id) }}">XEM THÊM</a>
                     </button>
-
                 </div>
+            </a>
         </div>
         @endforeach
     </div>

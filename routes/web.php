@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -53,3 +54,5 @@ Route::get('/search', [ProductController::class, 'search'])->name('products.sear
 Route::get('/filterProduct', [ProductController::class, 'filterProduct'])->name('products.filterProduct');
 //Detail Blog
 Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
+
+//Cart

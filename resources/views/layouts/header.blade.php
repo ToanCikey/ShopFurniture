@@ -1,5 +1,5 @@
-<div class="container-fluid header text-white py-2">
-    <div class="d-flex justify-content-between align-items-center">
+<div class="container-fluid header text-white py-2 custom-header">
+    <div class="d-flex justify-content-between align-items-center ">
         <!-- Logo -->
         <div class="logo">
             <h3 class="m-0 fw-bold  text-black">FURNITURE</h3>
@@ -38,11 +38,14 @@
             <a href="#" class="text-white mx-2">
                 <img src="{{ asset('assets/image/search.png') }}" alt="Search" width="20px">
             </a>
-            <a href="#" class="text-white mx-2">
+            <a href="#" class="text-white mx-2 cart-icon">
                 <img src="{{ asset('assets/image/shopping-cart.png') }}" alt="Cart" width="25px">
+                <span class="cart-count position-absolute"
+                    style="top: -5px; right: -10px; background: red; border-radius: 50%; color: white; padding: 0 5px;"></span>
             </a>
+
             <div class="dropdown">
-                <div  class="text-black mx-2 dropdown-toggle" data-bs-toggle="dropdown">
+                <div class="text-black mx-2 dropdown-toggle" data-bs-toggle="dropdown">
                     <img src="{{ asset('assets/image/user.png') }}" alt="User" width="20px">
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end">

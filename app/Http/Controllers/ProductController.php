@@ -42,7 +42,8 @@ class ProductController extends Controller
     }
     public function detail($id)
     {
-        $product = Product::with('productImages')->findOrFail($id);
+        $product = Product::with('productImages', 'category')->findOrFail($id);
+
         return view('products.detail', compact('product'));
     }
     public function search(Request $request)

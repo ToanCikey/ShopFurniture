@@ -2,6 +2,14 @@
     margin: 0;
     padding: 0;
 }
+.custom-a {
+    color: #000;
+    text-decoration: none;
+}
+.custom-header {
+    position: fixed;
+    z-index: 10;
+}
 /* navbar top */
 .navbar-top {
     width: 100%;
@@ -27,7 +35,7 @@
     transition: transform 0.3s;
 }
 .icons img:hover {
-    transform: scale(1.2); /* Phóng to khi hover */
+    transform: scale(1.2);
 }
 .dropdown-menu {
     min-width: 150px;
@@ -43,11 +51,10 @@
     text-decoration: underline;
 }
 .banner img {
-    height: 90vh; /* Đặt chiều cao của ảnh bằng chiều cao màn hình */
-    /* Đảm bảo ảnh luôn lấp đầy khung hình mà không bị méo */
+    height: 90vh;
 }
 .carousel-inner {
-    height: 100vh; /* Chiều cao của vùng carousel */
+    height: 100vh;
 }
 
 .social-link i img {
@@ -326,7 +333,7 @@
 .row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .col-md-3 {
@@ -343,9 +350,15 @@
     text-align: center;
     margin-top: 10px;
 }
+.product-info h3 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 .product-text {
     display: flex;
     justify-content: center;
+    white-space: nowrap;
 }
 .material {
     font-weight: 200;
@@ -390,7 +403,7 @@
 }
 
 .price {
-    font-size: 1.2em;
+    font-size: 1rem;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -670,4 +683,71 @@ container {
     background-color: #007bff;
     color: white;
     border-color: #007bff;
+}
+/* //cart */
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+}
+.add-to-cart a {
+    pointer-events: auto;
+    cursor: pointer;
+}
+/*  */
+.cart-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-dropdown {
+    display: none;
+    top: 40px;
+    right: 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.cart-dropdown .cart-items {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.cart-dropdown .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.cart-dropdown .cart-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.cart-dropdown .cart-item span {
+    flex: 1;
+    font-size: 14px;
+}
+/* cart */
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: red;
+    border-radius: 50%;
+    color: white;
+    padding: 0 5px;
+    font-size: 12px;
 }

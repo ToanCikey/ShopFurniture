@@ -104,4 +104,14 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('products.show', compact('products', 'categories'));
     }
+    public function show($id)
+    {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+        echo (response()->json($product));
+        return response()->json($product);
+    }
 }

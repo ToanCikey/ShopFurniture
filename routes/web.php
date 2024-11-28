@@ -56,3 +56,5 @@ Route::get('/filterProduct', [ProductController::class, 'filterProduct'])->name(
 Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
 
 //Cart
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/products/{id}', [ProductController::class, 'show']);

@@ -38,11 +38,12 @@
             <a href="#" class="text-white mx-2">
                 <img src="{{ asset('assets/image/search.png') }}" alt="Search" width="20px">
             </a>
-            <a href="#" class="text-white mx-2 cart-icon">
+            <a href="#" class="text-white mx-2 cart-icon" id="cart-icon">
                 <img src="{{ asset('assets/image/shopping-cart.png') }}" alt="Cart" width="25px">
                 <span class="cart-count position-absolute"
                     style="top: -5px; right: -10px; background: red; border-radius: 50%; color: white; padding: 0 5px;"></span>
             </a>
+
 
             <div class="dropdown">
                 <div class="text-black mx-2 dropdown-toggle" data-bs-toggle="dropdown">
@@ -66,3 +67,19 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cartUrl = "{{ route('cart.index') }}"; // Đảm bảo đây là trong view Blade
+        console.log(cartUrl); // Kiểm tra giá trị của cartUrl
+
+        const cartIcon = document.getElementById('cart-icon');
+        if (cartIcon) {
+            cartIcon.addEventListener('click', (event) => {
+                event.preventDefault();
+                window.location.href = cartUrl; // Sử dụng biến để chuyển hướng
+            });
+        } else {
+            console.error("Cart icon not found");
+        }
+    });
+</script>

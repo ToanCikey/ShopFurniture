@@ -121,7 +121,7 @@
                         <p class="material">Chất liệu: {{ $product->material }}</p>
                         <p class="price" style="font-weight: 200;">Giá: {{ number_format($product->price) }} VND</p>
                     </div>
-                    <button class="add-to-cart" type="button">THÊM VÀO GIỎ</button>
+                    <button class="add-to-cart" type="button" data-id="{{ $product->id }}">THÊM VÀO GIỎ</button>
                     <button class="view-more">
                         <a href="{{ route('products.detail', $product->id) }}">XEM THÊM</a>
                     </button>
@@ -132,6 +132,7 @@
     </div>
     {{ $products->links() }}
 </div>
+
 <!-- card3 -->
 
 <!-- about -->

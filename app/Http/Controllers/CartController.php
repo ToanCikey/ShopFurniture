@@ -9,5 +9,8 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
-    public function addToCart(Request $request) {}
+    public function index()
+    {
+        return view('cart.index'); // Đảm bảo tên file view là 'cart.blade.php'
+    }
 }

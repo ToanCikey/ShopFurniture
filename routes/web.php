@@ -3,14 +3,13 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Admin\ManagerUserController;
+
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -35,10 +34,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/account-dash', [UserController::class, 'account_dashboard'])->name('user.account.dashboard');
 });
-//  Route::get('/admin/user', [ManagerUserController::class, 'index'])->name('admin.manageruser');
-// Route::middleware(['auth', AuthAdmin::class])->group(function () {
-//     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-// });
+
+Route::middleware(['auth', AuthAdmin::class])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+});
 Route::get('/', [CategoryController::class, 'index'])->name('index');
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
@@ -57,40 +56,5 @@ Route::get('/filterProduct', [ProductController::class, 'filterProduct'])->name(
 Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
 
 //Cart
-<<<<<<< HEAD
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/products/{id}', [ProductController::class, 'show']);
-=======
-
-
-//ADMIN
-Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->group(function () {
-    // Route cho trang Dashboard
-    Route::get('/', [AdminController::class, 'index'])->name('index');
-
-    // Route cho Quản lý người dùng
-     Route::prefix('user')->name('user.')->group(function () {
-        Route::get('/', [ManagerUserController::class, 'index'])->name('manageruser'); 
-        Route::get('/create', [ManagerUserController::class, 'create'])->name('manageruser.create'); 
-        Route::post('/', [ManagerUserController::class, 'store'])->name('manageruser.store'); 
-    });
-    Route::prefix('blog')->name('blog.')->group(function () {
-        Route::get('/', [BlogController::class, 'index'])->name('managerblog'); 
-        Route::get('/create', [BlogController::class, 'create'])->name('managerblog.create'); 
-        Route::post('/', [BlogController::class, 'store'])->name('managerblog.store'); 
-    });
-
-    // Quản lý đơn hàng
-    Route::prefix('order')->name('order.')->group(function () {
-        Route::get('/', [OrderController::class, 'index'])->name('managerorder'); 
-        Route::get('/{id}', [OrderController::class, 'show'])->name('show'); 
-    });
-
-    // Quản lý sản phẩm
-    Route::prefix('product')->name('product.')->group(function () {
-        Route::get('/', [ProductController::class, 'index'])->name('managerproduct'); 
-        Route::get('/create', [ProductController::class, 'create'])->name('managerproduct.create'); 
-        Route::post('/', [ProductController::class, 'store'])->name('managerproduct.store'); 
-    });
-});
->>>>>>> 7df17cff7fb83f34827917b42c70d5f7dbf65e81

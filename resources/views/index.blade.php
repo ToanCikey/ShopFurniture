@@ -44,7 +44,7 @@
     <div class="row" style="margin-top: 50px;">
         @foreach ($blogs as $blog)
         <div class="col-md-4 py-3 py-md-0">
-            <div class="card">
+            <div class="card" style="height: 600px;">
                 <img src="{{ $blog->image }}" alt="" class="card image-top" style="height: 200px;">
                 <div class="card-body">
                     <!-- <h5 class="card-titel text-center">{{ $blog->description }}</h5> -->
@@ -121,7 +121,9 @@
                         <p class="material">Chất liệu: {{ $product->material }}</p>
                         <p class="price" style="font-weight: 200;">Giá: {{ number_format($product->price) }} VND</p>
                     </div>
-                    <button class="add-to-cart" type="button" data-id="{{ $product->id }}">THÊM VÀO GIỎ</button>
+                    <!-- <input type="hidden" class="quality" value="1"> -->
+                    <button class="add-to-cart" type="button" data-id="{{ $product->id }}" data-quality="1">THÊM VÀO
+                        GIỎ</button>
                     <button class="view-more">
                         <a href="{{ route('products.detail', $product->id) }}">XEM THÊM</a>
                     </button>
@@ -161,3 +163,30 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    const all_addtocart = document.querySelectorAll('.add-to-cart');
+    all_addtocart.forEach(bt => {
+        // alert("click m3");
+        bt.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            // console.log(bt.dataset.id);
+            // console.log(bt.dataset.quality);
+
+            axios.post("{{ route('add-product-cart')}}", {
+                    product_id: bt.dataset.id,
+                    quality: bt.dataset.quality
+                })
+                .then(response => {
+                    console.log(response);
+                    document.querySelector('#tongsoluong').innerText = response.data.cartCount
+                })
+                .catch(error => {
+                    console.error('Error adding to cart:', error.response ? error.response.data : error
+                        .message);
+                })
+        })
+    });
+</script>
+@endpush

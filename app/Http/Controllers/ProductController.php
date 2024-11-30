@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductImage;
 use App\Models\Blog;
+use Illuminate\Support\Facades\Log;
+
 
 class ProductController extends Controller
 {
@@ -106,12 +108,18 @@ class ProductController extends Controller
     }
     public function show($id)
     {
+        Log::info('Fetching product with id: ' . $id);
         $product = Product::find($id);
-
         if (!$product) {
+            Log::error('Product not found with id: ' . $id);
             return response()->json(['message' => 'Product not found'], 404);
         }
-        echo (response()->json($product));
+        echo $product;
+        Log::info('Product found: ', $product->toArray());
         return response()->json($product);
+    }
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id');
     }
 }

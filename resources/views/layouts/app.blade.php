@@ -20,6 +20,12 @@
     @include('layouts.header')
     @yield('content')
     @include('layouts.footer')
+    @stack('scripts')
+    <!-- <script src="{{asset('./js/bootstrap.js')}}">
+
+    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </body>
 
 

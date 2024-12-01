@@ -70,6 +70,9 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
         Route::get('/', [ManagerUserController::class, 'index'])->name('manageruser');
         Route::get('/create', [ManagerUserController::class, 'create'])->name('manageruser.create');
         Route::post('/', [ManagerUserController::class, 'store'])->name('manageruser.store');
+        Route::delete('/{id}', [ManagerUserController::class, 'destroy'])->name('manageruser.destroy');
+        Route::get('/{id}/edit', [ManagerUserController::class, 'edit'])->name('manageruser.edit');
+        Route::put('/{id}', [ManagerUserController::class, 'update'])->name('manageruser.update');
     });
     Route::prefix('blog')->name('blog.')->group(function () {
         Route::get('/', [BlogController::class, 'index'])->name('managerblog');

@@ -4,18 +4,18 @@
 <div class="container px-4 py-5 mx-auto" style="margin-top: 55px; width: 1320px;">
     <div class="row d-flex justify-content-center" style="width: 100%;">
         <div class="col-5">
-            <h4 class="heading">Shopping Bag</h4>
+            <h4 class="heading">Sản Phẩm</h4>
         </div>
         <div class="col-7">
             <div class="row text-right">
                 <div class="col-4">
-                    <h6 class="mt-2">Format</h6>
+                    <h6 class="mt-2">Vật liệu</h6>
                 </div>
                 <div class="col-4">
-                    <h6 class="mt-2">Quantity</h6>
+                    <h6 class="mt-2">Số Lượng</h6>
                 </div>
                 <div class="col-4">
-                    <h6 class="mt-2">Price</h6>
+                    <h6 class="mt-2">Giá</h6>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="my-auto col-7">
             <div class="row text-right">
                 <div class="col-4">
-                    <p class="mob-text">Digital</p>
+                    <p class="mob-text">{{$item['material']}}</p>
                 </div>
                 <div class="col-4">
                     <div class="row d-flex justify-content-end px-3">
@@ -51,8 +51,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4" style="display: flex; justify-content: space-between;">
                     <h6 class="mob-text">{{number_format($item['price'] * $item['quality'])}} VNĐ</h6>
+                    <i class="fa-solid fa-trash delete-item" data-product-id="{{$item['id']}}"></i>
                 </div>
             </div>
         </div>
@@ -125,23 +126,16 @@
     </div>
 </div>
 @endsection
+@push('script')
 <script>
-$(document).ready(function() {
+const deleteCart = document.querySelectorAll('.delete-item');
+console.log(deleteCart);
 
-    $('.radio-group .radio').click(function() {
-        $('.radio').addClass('gray');
-        $(this).removeClass('gray');
-    });
+deleteCart.forEach(deletes => {
+    deletes.addEventListener('click', () => {
+        console.log('xoa nha');
 
-    $('.plus-minus .plus').click(function() {
-        var count = $(this).parent().prev().text();
-        $(this).parent().prev().html(Number(count) + 1);
-    });
-
-    $('.plus-minus .minus').click(function() {
-        var count = $(this).parent().prev().text();
-        $(this).parent().prev().html(Number(count) - 1);
-    });
-
-});
+    })
+})
 </script>
+@endpush

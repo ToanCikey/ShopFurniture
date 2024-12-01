@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\ManagerUserController;
+use App\Http\Controllers\ContactController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,9 @@ Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
 Route::get('cart/', [CartController::class, 'index'])->name('cart.index');
 // Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::post('add-to-cart', [CartController::class, 'addCart'])->name('add-product-cart');
-
+Route::delete('/delete-cart-product', [CartController::class, 'deleteCart'])->name('delete-product-cart');
+//contact
+Route::get('contact', [ContactController::class, 'index'])->name('contact');
 
 Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->group(function () {
     // Route cho trang Dashboard

@@ -27,7 +27,7 @@
                         <a class="nav-link text-white fw-bold px-3" href="#">Brands</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fw-bold px-3" href="#">Contact</a>
+                        <a class="nav-link text-white fw-bold px-3" href="{{route('contact')}}">Liên Hệ</a>
                     </li>
                 </ul>
             </div>

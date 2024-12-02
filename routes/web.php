@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\ManagerUserController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LoginGoogleController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -94,3 +95,8 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
         Route::post('/', [ProductController::class, 'store'])->name('managerproduct.store');
     });
 });
+
+
+// login by gg
+Route::get('auth/google', [LoginGoogleController::class,'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [LoginGoogleController::class,'handleGoogleCallback']);

@@ -23,6 +23,9 @@
     @php $total = 0 @endphp
     @if(session('cart'))
     @foreach(session('cart') as $id => $item)
+    @php
+    $total += $item['price'] * $item['quality'];
+    @endphp
     <div class="row d-flex justify-content-center border-top" style="width: 100%;">
         <div class="col-5">
             <div class="row d-flex">
@@ -47,7 +50,8 @@
                 <div class="col-4">
                     <div class="row d-flex justify-content-end px-3">
                         <div class="d-flex flex-column plus-minus">
-                            <input type="number" value="{{$item['quality']}}">
+                            <input type="number" class="quality" data-product="{{$item['id']}}"
+                                value="{{$item['quality']}}">
                         </div>
                     </div>
                 </div>
@@ -62,63 +66,87 @@
     @endif
     <div class="row justify-content-center">
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card" style="min-width: 1200px;">
                 <div class="row">
-                    <div class="col-lg-3 radio-group">
-                        <div class="row d-flex px-3 radio">
-                            <img class="pay" src="https://i.imgur.com/WIAP9Ku.jpg">
-                            <p class="my-auto">Credit Card</p>
-                        </div>
-                        <div class="row d-flex px-3 radio gray">
-                            <img class="pay" src="https://i.imgur.com/OdxcctP.jpg">
-                            <p class="my-auto">Debit Card</p>
-                        </div>
-                        <div class="row d-flex px-3 radio gray mb-3">
-                            <img class="pay" src="https://i.imgur.com/cMk1MtK.jpg">
-                            <p class="my-auto">PayPal</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="row px-2">
-                            <div class="form-group col-md-6">
-                                <label class="form-control-label">Name on Card</label>
-                                <input type="text" id="cname" name="cname" placeholder="Johnny Doe">
+                    <div class="col-lg-12">
+                        <h5>Thông Tin Người Nhận</h5>
+                        <form action="{{ route('checkout') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="receiverName">Tên Người Nhận</label>
+                                <input type="text" id="receiverName" name="receiverName" class="form-control"
+                                    placeholder="Nhập tên người nhận" required>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="form-control-label">Card Number</label>
-                                <input type="text" id="cnum" name="cnum" placeholder="1111 2222 3333 4444">
+                            <div class="form-group">
+                                <label for="receiverAddress">Địa Chỉ Nhận Hàng</label>
+                                <input type="text" id="receiverAddress" name="receiverAddress" class="form-control"
+                                    placeholder="Nhập địa chỉ nhận hàng" required>
                             </div>
-                        </div>
-                        <div class="row px-2">
-                            <div class="form-group col-md-6">
-                                <label class="form-control-label">Expiration Date</label>
-                                <input type="text" id="exp" name="exp" placeholder="MM/YYYY">
+                            <div class="form-group">
+                                <label for="receiverPhone">Số Điện Thoại</label>
+                                <input type="tel" id="receiverPhone" name="receiverPhone" class="form-control"
+                                    placeholder="Nhập số điện thoại" required>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="form-control-label">CVV</label>
-                                <input type="text" id="cvv" name="cvv" placeholder="***">
+                            <input type="hidden" name="totalPrice" value="{{ $total }}">
+                            <div style="display: flex; justify-content: space-between;">
+
+                                <div class="col-lg-5">
+                                    <h5>Phương Thức Thanh Toán</h5>
+                                    <div class="row px-2">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="momoRadio"
+                                                name="paymentMethod" value="momo">
+                                            <label class="form-check-label" for="momoRadio">MoMo</label>
+                                        </div>
+                                        <div class="form-group" id="momoDetails" style="display: none;">
+                                            <label class="form-control-label">Số Điện Thoại MoMo</label>
+                                            <input type="tel" id="momoPhone" name="momoPhone"
+                                                placeholder="Nhập số điện thoại MoMo" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row px-2">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="zalopayRadio"
+                                                name="paymentMethod" value="zalopay">
+                                            <label class="form-check-label" for="zalopayRadio">ZaloPay</label>
+                                        </div>
+                                        <div class="form-group" id="zalopayDetails" style="display: none;">
+                                            <label class="form-control-label">Số Điện Thoại ZaloPay</label>
+                                            <input type="tel" id="zaloPhone" name="zaloPhone"
+                                                placeholder="Nhập số điện thoại ZaloPay" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row px-2">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="codRadio"
+                                                name="paymentMethod" value="cod">
+                                            <label class="form-check-label" for="codRadio">Thanh toán khi nhận
+                                                hàng</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 mt-2">
+                                    <div class="row d-flex justify-content-between px-4">
+                                        <p class="mb-1 text-left">Tổng tiền</p>
+                                        <h6 class="mb-1 text-right">{{ number_format($total) }} VNĐ</h6>
+                                    </div>
+                                    <div class="row d-flex justify-content-between px-4">
+                                        <p class="mb-1 text-left">Shipping</p>
+                                        <h6 class="mb-1 text-right">Miễn Phí</h6>
+                                    </div>
+                                    <div class="row d-flex justify-content-between px-4" id="tax">
+                                        <p class="mb-1 text-left">Tổng tiền (có thuế)</p>
+                                        <h6 class="mb-1 text-right">{{ number_format($total) }} VNĐ</h6>
+                                    </div>
+                                    <button type="submit" class="btn-block btn-blue">
+                                        <span>
+                                            <span id="checkout">Thanh Toán</span>
+                                        </span>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                        <div class="row d-flex justify-content-between px-4">
-                            <p class="mb-1 text-left">Subtotal</p>
-                            <h6 class="mb-1 text-right">$23.49</h6>
-                        </div>
-                        <div class="row d-flex justify-content-between px-4">
-                            <p class="mb-1 text-left">Shipping</p>
-                            <h6 class="mb-1 text-right">$2.99</h6>
-                        </div>
-                        <div class="row d-flex justify-content-between px-4" id="tax">
-                            <p class="mb-1 text-left">Total (tax included)</p>
-                            <h6 class="mb-1 text-right">$26.48</h6>
-                        </div>
-                        <button class="btn-block btn-blue">
-                            <span>
-                                <span id="checkout">Checkout</span>
-                                <span id="check-amt">$26.48</span>
-                            </span>
-                        </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -126,16 +154,34 @@
     </div>
 </div>
 @endsection
+
 @push('script')
 <script>
-const deleteCart = document.querySelectorAll('.delete-item');
-console.log(deleteCart);
+    const deleteCart = document.querySelectorAll('.delete-item');
+    deleteCart.forEach(deletes => {
+        deletes.addEventListener('click', () => {
+            axios.delete("{{route('delete-product-cart')}}", {
+                    params: {
+                        id: deletes.dataset.productId
+                    }
+                })
+                .then(res => {
+                    window.location.reload();
+                })
+        });
+    });
 
-deleteCart.forEach(deletes => {
-    deletes.addEventListener('click', () => {
-        console.log('xoa nha');
-
-    })
-})
+    const inputQuality = document.querySelectorAll('.quality');
+    inputQuality.forEach(inp => {
+        inp.addEventListener('change', (e) => {
+            axios.post("{{ route('update-product-cart')}}", {
+                    product_id: inp.dataset.product,
+                    quality: e.target.value
+                })
+                .then(res => {
+                    window.location.reload();
+                });
+        });
+    });
 </script>
 @endpush

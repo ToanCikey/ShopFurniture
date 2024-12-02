@@ -49,9 +49,6 @@
             </a>
             <a href="{{route('cart.index')}}" class="text-white mx-2 cart-icon" id="cart-icon">
                 <img src="{{ asset('assets/image/shopping-cart.png') }}" alt="Cart" width="25px">
-                <!-- <span class="cart-count position-absolute"
-                    style="top: -5px; right: -10px; background: red; border-radius: 50%; color: white; padding: 0 5px;"></span>
-            </a> -->
                 <span class="cart-coounts" id="tongsoluong">{{ $totalQuantity }}</span>
             </a>
 
@@ -64,7 +61,7 @@
                     <li><a class="dropdown-item" href="{{ route('auth.login') }}">Login</a></li>
                     @else
                     <li><a class="dropdown-item" href="#">{{ Auth::user()->name }}</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="{{route('order.index')}}">Đơn hàng của tôi</a></li>
                     <li>
                         <form action="{{ route('auth.logout') }}" method="POST">
                             @csrf

@@ -13,6 +13,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\ManagerUserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Middleware\AuthAdmin;
+use App\Http\Middleware\CheckUserRole;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -58,13 +60,20 @@ Route::get('/filterProduct', [ProductController::class, 'filterProduct'])->name(
 Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
 
 //Cart
-Route::get('cart/', [CartController::class, 'index'])->name('cart.index');
-// Route::get('/products/{id}', [ProductController::class, 'show']);
-Route::post('add-to-cart', [CartController::class, 'addCart'])->name('add-product-cart');
-Route::delete('/delete-cart-product', [CartController::class, 'deleteCart'])->name('delete-product-cart');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::delete('/delete-cart-product', [CartController::class, 'deleteCart'])->name('delete-product-cart');
+    Route::post('/update-cart-product', [CartController::class, 'updateCart'])->name('update-product-cart');
+});
+
+Route::post('/add-to-cart', [CartController::class, 'addCart'])->name('add-product-cart');
+
 //contact
 Route::get('contact', [ContactController::class, 'index'])->name('contact');
-
+//checkout
+Route::post('/checkout', [OrderController::class, 'processCheckout'])->name('checkout');
+Route::get('/orderSuccess', [OrderController::class, 'index'])->name('order.index');
+Route::get('/orderAlter', [OrderController::class, 'success'])->name('order.success');
 Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->group(function () {
     // Route cho trang Dashboard
     Route::get('/', [AdminController::class, 'index'])->name('index');

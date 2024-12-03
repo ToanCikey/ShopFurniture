@@ -69,12 +69,16 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/add-to-cart', [CartController::class, 'addCart'])->name('add-product-cart');
 
-//contact
-Route::get('contact', [ContactController::class, 'index'])->name('contact');
+
 //checkout
 Route::post('/checkout', [OrderController::class, 'processCheckout'])->name('checkout');
 Route::get('/orderSuccess', [OrderController::class, 'index'])->name('order.index');
 Route::get('/orderAlter', [OrderController::class, 'success'])->name('order.success');
+//contact
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'sendmail']);
+
+
 Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->group(function () {
     // Route cho trang Dashboard
     Route::get('/', [AdminController::class, 'index'])->name('index');

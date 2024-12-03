@@ -64,7 +64,8 @@ Route::get('cart/', [CartController::class, 'index'])->name('cart.index');
 Route::post('add-to-cart', [CartController::class, 'addCart'])->name('add-product-cart');
 Route::delete('/delete-cart-product', [CartController::class, 'deleteCart'])->name('delete-product-cart');
 //contact
-Route::get('contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'sendmail']);
 
 Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->group(function () {
     // Route cho trang Dashboard

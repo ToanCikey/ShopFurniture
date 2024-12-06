@@ -49,14 +49,14 @@ class ManagerUserController extends Controller
 
     return redirect()->route('admin.user.manageruser')->with('success', 'Tài khoản đã được thêm thành công!');
     
-}
+    }
     public function destroy($id){
         $user = User::findOrFail($id);
         $user->delete();
         return redirect()->route('admin.user.manageruser')->with('success', 'Tài khoản đã được xóa thành công!');
     }
 
-      public function edit($id){
+    public function edit($id){
         $user = User::find($id);
        return view("admin.user.updateuser")->with("user",$user);
     }

@@ -23,7 +23,7 @@ class AuthAdmin
                 return $next($request);
             } else {
                 session()->flush();
-                return redirect()->route('home.index');
+                return redirect()->route('index');
             }
         } else {
             session()->flush();

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ManagerBlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
@@ -89,10 +90,14 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
         Route::get('/{id}/edit', [ManagerUserController::class, 'edit'])->name('manageruser.edit');
         Route::put('/{id}', [ManagerUserController::class, 'update'])->name('manageruser.update');
     });
+     // Route cho Quản lý bài viết
     Route::prefix('blog')->name('blog.')->group(function () {
-        Route::get('/', [BlogController::class, 'index'])->name('managerblog');
-        Route::get('/create', [BlogController::class, 'create'])->name('managerblog.create');
-        Route::post('/', [BlogController::class, 'store'])->name('managerblog.store');
+        Route::get('/', [ManagerBlogController::class, 'index'])->name('managerblog');
+        Route::get('/create', [ManagerBlogController::class, 'create'])->name('managerblog.create');
+        Route::post('/', [ManagerBlogController::class, 'store'])->name('managerblog.store');
+        Route::delete('/{id}', [ManagerBlogController::class, 'destroy'])->name('managerblog.destroy');
+        Route::get('/{id}/edit', [ManagerBlogController::class, 'edit'])->name('managerblog.edit');
+        Route::put('/{id}', [ManagerBlogController::class, 'update'])->name('managerblog.update');
     });
     // Quản lý đơn hàng
     Route::prefix('order')->name('order.')->group(function () {

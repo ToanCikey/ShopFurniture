@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\ManagerUserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LoginGoogleController;
+use App\Http\Controllers\LoginFacebookController;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\CheckUserRole;
 
@@ -113,3 +114,7 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
 // login by gg
 Route::get('auth/google', [LoginGoogleController::class,'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [LoginGoogleController::class,'handleGoogleCallback']);
+
+//login by fb
+Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('auth/facebook/callback', [LoginFacebookController::class, 'handleFacebookCallback']);

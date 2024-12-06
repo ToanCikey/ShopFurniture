@@ -41,9 +41,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/account-dash', [UserController::class, 'account_dashboard'])->name('user.account.dashboard');
 });
 
-Route::middleware(['auth', AuthAdmin::class])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-});
 Route::get('/', [CategoryController::class, 'index'])->name('index');
 Route::get('/', [ProductController::class, 'index'])->name('index');
 

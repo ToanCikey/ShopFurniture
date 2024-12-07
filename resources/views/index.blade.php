@@ -83,7 +83,7 @@
             <div class="categories">
                 @foreach ($categories as $category)
                     <div class="category">
-                        <img src="{{ asset($category->image) }}" alt="{{ $category->name }}">
+                        <img src="{{ asset('assets/image/categoris/' . $category->image) }}" alt="{{ $category->name }}">
                         <h3>{{ $category->name }}</h3>
                     </div>
                 @endforeach

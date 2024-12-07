@@ -3,6 +3,9 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ManagerBlogController;
+use App\Http\Controllers\Admin\ManagerCategoryController;
+use App\Http\Controllers\Admin\ManagerOrderController;
+use App\Http\Controllers\Admin\ManagerProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
@@ -101,14 +104,23 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
     });
     // Quản lý đơn hàng
     Route::prefix('order')->name('order.')->group(function () {
-        Route::get('/', [OrderController::class, 'index'])->name('managerorder');
-        Route::get('/{id}', [OrderController::class, 'show'])->name('show');
+        Route::get('/', [ManagerOrderController::class, 'index'])->name('managerorder');
+        Route::get('/{id}', [ManagerOrderController::class, 'show'])->name('show');
     });
     // Quản lý sản phẩm
     Route::prefix('product')->name('product.')->group(function () {
-        Route::get('/', [ProductController::class, 'index'])->name('managerproduct');
-        Route::get('/create', [ProductController::class, 'create'])->name('managerproduct.create');
-        Route::post('/', [ProductController::class, 'store'])->name('managerproduct.store');
+        Route::get('/', [ManagerProductController::class, 'index'])->name('managerproduct');
+        Route::get('/create', [ManagerProductController::class, 'create'])->name('managerproduct.create');
+        Route::post('/', [ManagerProductController::class, 'store'])->name('managerproduct.store');
+    });
+     // Quản lý danh mục sản phẩm
+    Route::prefix('category')->name('category.')->group(function () {
+        Route::get('/', [ManagerCategoryController::class, 'index'])->name('managercategory');
+        Route::get('/create', [ManagerCategoryController::class, 'create'])->name('managercategory.create');
+        Route::post('/', [ManagerCategoryController::class, 'store'])->name('managercategory.store');
+        Route::delete('/{id}', [ManagerCategoryController::class, 'destroy'])->name('managercategory.destroy');
+        Route::get('/{id}/edit', [ManagerCategoryController::class, 'edit'])->name('managercategory.edit');
+        Route::put('/{id}', [ManagerCategoryController::class, 'update'])->name('managercategory.update');
     });
 });
 

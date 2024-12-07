@@ -44,6 +44,9 @@ class ManagerBlogController extends Controller
 
      public function destroy($id){
         $blog = Blog::findOrFail($id);
+        if ($blog->image && file_exists(public_path('assets/image/blogs/' . $blog->image))) {
+                unlink(public_path('assets/image/blogs/' . $blog->image));
+            }
         $blog->delete();
         return redirect()->route('admin.blog.managerblog')->with('success', 'Bài viết đã được xóa thành công!');
     }

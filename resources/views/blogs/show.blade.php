@@ -16,6 +16,7 @@ Bài viết
             giác nửa kín nửa hở cho mẫu cầu thang này. Ánh sáng được đặt dưới hệ lam để tạo hiệu ứng ánh sáng tô điểm
             thêm cho cầu thang. Ánh sáng cũng là một phần quan trọng trong việc thiết kế nên một cầu thang đẹp.</p>
     </div>
+<<<<<<< HEAD
 </div>
 </div>
 <!-- <style>
@@ -66,6 +67,19 @@ Bài viết
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+=======
+
+    </div>
+
+    <style>
+        .container {
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+>>>>>>> b41393fdd79984d2b22ef2e0ddf3ee2e9fcb4bd8
 
 .blog-title {
     text-align: center;
@@ -78,12 +92,21 @@ Bài viết
     margin-bottom: 30px;
 }
 
+<<<<<<< HEAD
 .blog-image {
     width: 100%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
+=======
+        .blog-image {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+>>>>>>> b41393fdd79984d2b22ef2e0ddf3ee2e9fcb4bd8
 
 .blog-description {
     font-weight: bold;
@@ -91,6 +114,7 @@ Bài viết
     margin: 15px 0;
 }
 
+<<<<<<< HEAD
 .blog-content {
     line-height: 1.6;
     color: #555;
@@ -98,3 +122,12 @@ Bài viết
 }
 </style>
 @endsection
+=======
+        .blog-content {
+            line-height: 1.6;
+            color: #555;
+            font-size: 1.1em;
+        }
+    </style>
+@endsection
+>>>>>>> b41393fdd79984d2b22ef2e0ddf3ee2e9fcb4bd8

@@ -52,6 +52,9 @@ class ManagerUserController extends Controller
     }
     public function destroy($id){
         $user = User::findOrFail($id);
+        if ($user->image && file_exists(public_path('assets/image/user/' . $user->image))) {
+            unlink(public_path('assets/image/user/' . $user->image));
+        }
         $user->delete();
         return redirect()->route('admin.user.manageruser')->with('success', 'Tài khoản đã được xóa thành công!');
     }

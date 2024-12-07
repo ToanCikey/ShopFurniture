@@ -3,6 +3,9 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ManagerBlogController;
+use App\Http\Controllers\Admin\ManagerCategoryController;
+use App\Http\Controllers\Admin\ManagerOrderController;
+use App\Http\Controllers\Admin\ManagerProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
@@ -73,8 +76,10 @@ Route::post('/add-to-cart', [CartController::class, 'addCart'])->name('add-produ
 Route::post('/checkout', [OrderController::class, 'processCheckout'])->name('checkout');
 Route::get('/orderSuccess', [OrderController::class, 'index'])->name('order.index');
 Route::get('/orderAlter', [OrderController::class, 'success'])->name('order.success');
+
 //momo
 Route::post('/momo_payment', [OrderController::class, 'momo_payment'])->name('momo_payment');
+
 //contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'sendmail']);
@@ -102,24 +107,36 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
     });
     // Quản lý đơn hàng
     Route::prefix('order')->name('order.')->group(function () {
-        Route::get('/', [OrderController::class, 'index'])->name('managerorder');
-        Route::get('/{id}', [OrderController::class, 'show'])->name('show');
+        Route::get('/', [ManagerOrderController::class, 'index'])->name('managerorder');
+        Route::get('/{id}', [ManagerOrderController::class, 'show'])->name('show');
     });
     // Quản lý sản phẩm
     Route::prefix('product')->name('product.')->group(function () {
-        Route::get('/', [ProductController::class, 'index'])->name('managerproduct');
-        Route::get('/create', [ProductController::class, 'create'])->name('managerproduct.create');
-        Route::post('/', [ProductController::class, 'store'])->name('managerproduct.store');
+        Route::get('/', [ManagerProductController::class, 'index'])->name('managerproduct');
+        Route::get('/create', [ManagerProductController::class, 'create'])->name('managerproduct.create');
+        Route::post('/', [ManagerProductController::class, 'store'])->name('managerproduct.store');
+    });
+    // Quản lý danh mục sản phẩm
+    Route::prefix('category')->name('category.')->group(function () {
+        Route::get('/', [ManagerCategoryController::class, 'index'])->name('managercategory');
+        Route::get('/create', [ManagerCategoryController::class, 'create'])->name('managercategory.create');
+        Route::post('/', [ManagerCategoryController::class, 'store'])->name('managercategory.store');
+        Route::delete('/{id}', [ManagerCategoryController::class, 'destroy'])->name('managercategory.destroy');
+        Route::get('/{id}/edit', [ManagerCategoryController::class, 'edit'])->name('managercategory.edit');
+        Route::put('/{id}', [ManagerCategoryController::class, 'update'])->name('managercategory.update');
     });
 });
 
 
 // login by gg
 
+
 Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);
+
 Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);
+
 //login by fb
 Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook'])->name('auth.facebook');
 Route::get('auth/facebook/callback', [LoginFacebookController::class, 'handleFacebookCallback']);

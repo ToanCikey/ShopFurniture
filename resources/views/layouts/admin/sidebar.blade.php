@@ -53,6 +53,12 @@
                         <p>Quản lý sản phẩm</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.category.managercategory') }}">
+                        <i class="fa-solid fa-list"></i>
+                        <p>Quản lý danh mục sản phẩm</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

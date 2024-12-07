@@ -1,19 +1,22 @@
 @extends('layouts.app')
 @section('title')
-    Liên Hệ
+Liên Hệ
 @endsection
 @section('content')
-    <div class="contact-container custom-contact">
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
+<div class="contact-container custom-contact">
+    @if (session('success'))
+    <div class="notification">
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    </div>
+    @endif
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+    <div style="display: flex;">
         <div class="contact-left">
             <h1>Hãy nói về mọi thứ.</h1>
             <p>Khách hàng là thượng đế, vui lòng khách đến vừa lòng khách đi.</p>
@@ -32,4 +35,5 @@
             </form>
         </div>
     </div>
+</div>
 @endsection

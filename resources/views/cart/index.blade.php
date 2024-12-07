@@ -98,6 +98,7 @@
                                             value="momo" required>
                                         <label class="form-check-label" for="momoRadio">MOMO</label>
                                     </div>
+
                                     <div class="row px-2">
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" id="zalopayRadio"
@@ -130,7 +131,7 @@
                                         <h6 class="mb-1 text-right">Miễn Phí</h6>
                                     </div>
                                     <div class="row d-flex justify-content-between px-4" id="tax">
-                                        <p class="mb-1 text-left">Tổng tiền (có thuế)</p>
+                                        <p class="mb-1 text-left">Tổng tiền</p>
                                         <h6 class="mb-1 text-right">{{ number_format($total) }} VNĐ</h6>
                                     </div>
                                     <button type="submit" class="btn-block btn-blue">
@@ -151,31 +152,31 @@
 
 @push('script')
 <script>
-    const deleteCart = document.querySelectorAll('.delete-item');
-    deleteCart.forEach(deletes => {
-        deletes.addEventListener('click', () => {
-            axios.delete("{{route('delete-product-cart')}}", {
-                    params: {
-                        id: deletes.dataset.productId
-                    }
-                })
-                .then(res => {
-                    window.location.reload();
-                })
-        });
+const deleteCart = document.querySelectorAll('.delete-item');
+deleteCart.forEach(deletes => {
+    deletes.addEventListener('click', () => {
+        axios.delete("{{route('delete-product-cart')}}", {
+                params: {
+                    id: deletes.dataset.productId
+                }
+            })
+            .then(res => {
+                window.location.reload();
+            })
     });
+});
 
-    const inputQuality = document.querySelectorAll('.quality');
-    inputQuality.forEach(inp => {
-        inp.addEventListener('change', (e) => {
-            axios.post("{{ route('update-product-cart')}}", {
-                    product_id: inp.dataset.product,
-                    quality: e.target.value
-                })
-                .then(res => {
-                    window.location.reload();
-                });
-        });
+const inputQuality = document.querySelectorAll('.quality');
+inputQuality.forEach(inp => {
+    inp.addEventListener('change', (e) => {
+        axios.post("{{ route('update-product-cart')}}", {
+                product_id: inp.dataset.product,
+                quality: e.target.value
+            })
+            .then(res => {
+                window.location.reload();
+            });
     });
+});
 </script>
 @endpush

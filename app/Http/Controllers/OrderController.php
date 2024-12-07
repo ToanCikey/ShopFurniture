@@ -56,14 +56,12 @@ class OrderController extends Controller
         // Xóa giỏ hàng
         session()->forget('cart');
         if ($request->input('paymentMethod') === 'momo') {
-            return $this->momo_payment($request); // Đảm bảo phương thức này hoạt động như mong muốn
-        } else {
-            return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
+            return $this->momo_payment($request);
         }
         // Chuyển hướng đến trang đơn hàng
-        //     return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
+        return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
     }
-    public function execPostRequest($url, $data)
+    function execPostRequest($url, $data)
     {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -87,32 +85,27 @@ class OrderController extends Controller
     }
     public function momo_payment(Request $request)
     {
-        // $totalPrice = $request->input('total_momo');
-        // Định nghĩa endpoint của MOMO
+
+
         $endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
 
-        // Lấy thông tin từ cấu hình
+
         $partnerCode = 'MOMOBKUN20180529';
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua MoMo";
         $amount = $request->input('totalPrice');
         $orderId = time() . "";
-        $returnUrl = "http://localhost:8000/atm/result_atm.php";
-        $notifyUrl = "http://localhost:8000/atm/ipn_momo.php"; // Lưu ý: link notifyUrl không phải là dạng localhost
+        $returnUrl = "http://localhost:8002/orderAlter";
+        $notifyurl = "http://localhost:8000/atm/ipn_momo.php";
         $bankCode = "SML";
 
-        // Kiểm tra dữ liệu POST
 
-        $partnerCode = 'MOMOBKUN20180529';
-        $accessKey = 'klm05TvNBzhg7h7j';
-        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $requestId = time() . "";
         $requestType = "payWithMoMoATM";
         $extraData = "";
-
-        // Tạo hash cho chữ ký HMAC SHA256
-        $rawHashArr = [
+        //before sign HMAC SHA256 signature
+        $rawHashArr =  array(
             'partnerCode' => $partnerCode,
             'accessKey' => $accessKey,
             'requestId' => $requestId,
@@ -121,28 +114,15 @@ class OrderController extends Controller
             'orderInfo' => $orderInfo,
             'bankCode' => $bankCode,
             'returnUrl' => $returnUrl,
-            'notifyUrl' => $notifyUrl,
+            'notifyUrl' => $notifyurl,
             'extraData' => $extraData,
             'requestType' => $requestType
-        ];
-
-        $rawHash = "partnerCode=" . $partnerCode .
-            "&accessKey=" . $accessKey .
-            "&requestId=" . $requestId .
-            "&bankCode=" . $bankCode .
-            "&amount=" . $amount .
-            "&orderId=" . $orderId .
-            "&orderInfo=" . $orderInfo .
-            "&returnUrl=" . $returnUrl .
-            "&notifyUrl=" . $notifyUrl .
-            "&extraData=" . $extraData .
-            "&requestType=" . $requestType;
-
-        // Tạo chữ ký
+        );
+        // echo $serectkey;die;
+        $rawHash = "partnerCode=" . $partnerCode . "&accessKey=" . $accessKey . "&requestId=" . $requestId . "&bankCode=" . $bankCode . "&amount=" . $amount . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&returnUrl=" . $returnUrl . "&notifyUrl=" . $notifyurl . "&extraData=" . $extraData . "&requestType=" . $requestType;
         $signature = hash_hmac("sha256", $rawHash, $secretKey);
 
-        // Tạo dữ liệu để gửi đi
-        $data = [
+        $data =  array(
             'partnerCode' => $partnerCode,
             'accessKey' => $accessKey,
             'requestId' => $requestId,
@@ -151,23 +131,17 @@ class OrderController extends Controller
             'orderInfo' => $orderInfo,
             'returnUrl' => $returnUrl,
             'bankCode' => $bankCode,
-            'notifyUrl' => $notifyUrl,
+            'notifyUrl' => $notifyurl,
             'extraData' => $extraData,
             'requestType' => $requestType,
             'signature' => $signature
-        ];
-
-        // Gửi yêu cầu đến endpoint
+        );
         $result = $this->execPostRequest($endpoint, json_encode($data));
-        $jsonResult = json_decode($result, true);  // Giải mã JSON
+        $jsonResult = json_decode($result, true);  // decode json
 
-        // if (isset($jsonResult['payUrl'])) {
-        //     return redirect($jsonResult['payUrl']);
-        // } else {
-        //     return redirect()->route('order.success')->withErrors(['message' => 'Lỗi khi tạo yêu cầu thanh toán MOMO.']);
-        // }
-
-        if (isset($jsonResult['payUrl'])) {
+        error_log(print_r($jsonResult, true));
+        // header('Location: ' . $jsonResult['payUrl']);
+        if (isset($jsonResult['payUrl']) && filter_var($jsonResult['payUrl'], FILTER_VALIDATE_URL)) {
             return redirect($jsonResult['payUrl']); // Chuyển hướng đến trang thanh toán của MOMO
         } else {
             return redirect()->route('order.success')->withErrors(['message' => 'Lỗi khi tạo yêu cầu thanh toán MOMO.']);

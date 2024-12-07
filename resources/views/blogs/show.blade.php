@@ -17,43 +17,42 @@
 </div>
 
 <style>
-    .container {
-        max-width: 800px;
-        margin: auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+.container {
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-    .blog-title {
-        text-align: center;
-        color: #2c3e50;
-        margin-bottom: 20px;
-        font-size: 2.5em;
-    }
+.blog-title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
 
-    .blog-post {
-        margin-bottom: 30px;
-    }
+.blog-post {
+    margin-bottom: 30px;
+}
 
-    .blog-image {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
+.blog-image {
+    width: 100%;
+    height: 600px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
 
-    .blog-description {
-        font-weight: bold;
-        color: #34495e;
-        margin: 15px 0;
-    }
+.blog-description {
+    font-weight: bold;
+    color: #34495e;
+    margin: 15px 0;
+}
 
-    .blog-content {
-        line-height: 1.6;
-        color: #555;
-        font-size: 1.1em;
-    }
+.blog-content {
+    line-height: 1.6;
+    color: #555;
+    font-size: 1.1em;
+}
 </style>
 @endsection

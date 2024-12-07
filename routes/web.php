@@ -75,6 +75,8 @@ Route::get('contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/checkout', [OrderController::class, 'processCheckout'])->name('checkout');
 Route::get('/orderSuccess', [OrderController::class, 'index'])->name('order.index');
 Route::get('/orderAlter', [OrderController::class, 'success'])->name('order.success');
+//momo
+Route::post('/momo_payment', [OrderController::class, 'momo_payment'])->name('momo_payment');
 Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->group(function () {
     // Route cho trang Dashboard
     Route::get('/', [AdminController::class, 'index'])->name('index');
@@ -107,5 +109,5 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
 
 
 // login by gg
-Route::get('auth/google', [LoginGoogleController::class,'redirectToGoogle'])->name('auth.google');
-Route::get('auth/google/callback', [LoginGoogleController::class,'handleGoogleCallback']);
+Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);

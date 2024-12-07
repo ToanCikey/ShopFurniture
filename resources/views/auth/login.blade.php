@@ -88,7 +88,7 @@
                         </div>
                         <div class="col-md-6">
                             <button class="btn btn-primary w-100" style="background-color: #3b5998;">
-                                <a href="#" class="text-white text-decoration-none">
+                                <a href="{{ route('auth.facebook') }}" class="text-white text-decoration-none">
                                     <i class="fab fa-facebook-f"></i> Facebook
                                 </a>
                             </button>

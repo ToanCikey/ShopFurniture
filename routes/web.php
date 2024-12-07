@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ManagerBlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\ManagerUserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LoginGoogleController;
+use App\Http\Controllers\LoginFacebookController;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\CheckUserRole;
 
@@ -40,9 +42,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/account-dash', [UserController::class, 'account_dashboard'])->name('user.account.dashboard');
 });
 
-Route::middleware(['auth', AuthAdmin::class])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-});
 Route::get('/', [CategoryController::class, 'index'])->name('index');
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
@@ -69,14 +68,21 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/add-to-cart', [CartController::class, 'addCart'])->name('add-product-cart');
 
-//contact
-Route::get('contact', [ContactController::class, 'index'])->name('contact');
+
 //checkout
 Route::post('/checkout', [OrderController::class, 'processCheckout'])->name('checkout');
 Route::get('/orderSuccess', [OrderController::class, 'index'])->name('order.index');
 Route::get('/orderAlter', [OrderController::class, 'success'])->name('order.success');
+<<<<<<< HEAD
 //momo
 Route::post('/momo_payment', [OrderController::class, 'momo_payment'])->name('momo_payment');
+=======
+//contact
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'sendmail']);
+
+
+>>>>>>> 19ca8f57cf4089f6794bb24a44023333d7371d30
 Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->group(function () {
     // Route cho trang Dashboard
     Route::get('/', [AdminController::class, 'index'])->name('index');
@@ -89,10 +95,14 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
         Route::get('/{id}/edit', [ManagerUserController::class, 'edit'])->name('manageruser.edit');
         Route::put('/{id}', [ManagerUserController::class, 'update'])->name('manageruser.update');
     });
+     // Route cho Quản lý bài viết
     Route::prefix('blog')->name('blog.')->group(function () {
-        Route::get('/', [BlogController::class, 'index'])->name('managerblog');
-        Route::get('/create', [BlogController::class, 'create'])->name('managerblog.create');
-        Route::post('/', [BlogController::class, 'store'])->name('managerblog.store');
+        Route::get('/', [ManagerBlogController::class, 'index'])->name('managerblog');
+        Route::get('/create', [ManagerBlogController::class, 'create'])->name('managerblog.create');
+        Route::post('/', [ManagerBlogController::class, 'store'])->name('managerblog.store');
+        Route::delete('/{id}', [ManagerBlogController::class, 'destroy'])->name('managerblog.destroy');
+        Route::get('/{id}/edit', [ManagerBlogController::class, 'edit'])->name('managerblog.edit');
+        Route::put('/{id}', [ManagerBlogController::class, 'update'])->name('managerblog.update');
     });
     // Quản lý đơn hàng
     Route::prefix('order')->name('order.')->group(function () {
@@ -109,5 +119,14 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
 
 
 // login by gg
+<<<<<<< HEAD
 Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);
+=======
+Route::get('auth/google', [LoginGoogleController::class,'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [LoginGoogleController::class,'handleGoogleCallback']);
+
+//login by fb
+Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('auth/facebook/callback', [LoginFacebookController::class, 'handleFacebookCallback']);
+>>>>>>> 19ca8f57cf4089f6794bb24a44023333d7371d30

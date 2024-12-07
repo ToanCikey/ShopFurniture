@@ -22,6 +22,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('google_id')->nullable();
+            $table->string('facebook_id')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

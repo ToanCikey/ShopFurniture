@@ -76,11 +76,16 @@ Route::post('/add-to-cart', [CartController::class, 'addCart'])->name('add-produ
 Route::post('/checkout', [OrderController::class, 'processCheckout'])->name('checkout');
 Route::get('/orderSuccess', [OrderController::class, 'index'])->name('order.index');
 Route::get('/orderAlter', [OrderController::class, 'success'])->name('order.success');
+<<<<<<< HEAD
+//momo
+Route::post('/momo_payment', [OrderController::class, 'momo_payment'])->name('momo_payment');
+=======
 //contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'sendmail']);
 
 
+>>>>>>> 19ca8f57cf4089f6794bb24a44023333d7371d30
 Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->group(function () {
     // Route cho trang Dashboard
     Route::get('/', [AdminController::class, 'index'])->name('index');
@@ -126,9 +131,14 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
 
 
 // login by gg
+<<<<<<< HEAD
+Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);
+=======
 Route::get('auth/google', [LoginGoogleController::class,'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [LoginGoogleController::class,'handleGoogleCallback']);
 
 //login by fb
 Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook'])->name('auth.facebook');
 Route::get('auth/facebook/callback', [LoginFacebookController::class, 'handleFacebookCallback']);
+>>>>>>> 19ca8f57cf4089f6794bb24a44023333d7371d30

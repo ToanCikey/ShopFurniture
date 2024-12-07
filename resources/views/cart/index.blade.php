@@ -92,17 +92,11 @@
 
                                 <div class="col-lg-5">
                                     <h5>Phương Thức Thanh Toán</h5>
-                                    <div class="row px-2">
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="momoRadio"
-                                                name="paymentMethod" value="momo">
-                                            <label class="form-check-label" for="momoRadio">MoMo</label>
-                                        </div>
-                                        <div class="form-group" id="momoDetails" style="display: none;">
-                                            <label class="form-control-label">Số Điện Thoại MoMo</label>
-                                            <input type="tel" id="momoPhone" name="momoPhone"
-                                                placeholder="Nhập số điện thoại MoMo" class="form-control">
-                                        </div>
+                                    <div class="form-check">
+                                        <input type="hidden" name="total_momo" value="{{ $total }}">
+                                        <input type="radio" class="form-check-input" id="momoRadio" name="paymentMethod"
+                                            value="momo" required>
+                                        <label class="form-check-label" for="momoRadio">MOMO</label>
                                     </div>
                                     <div class="row px-2">
                                         <div class="form-check">

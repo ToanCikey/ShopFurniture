@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+Product
+@endsection
 @section('content')
 <div class="container" style="margin-top: 85px;">
     @if(session('message'))
@@ -98,8 +101,12 @@
                     <div class="product-info">
                         <h3>{{ $product->name }}</h3>
                         <p class="price">{{ number_format($product->price) }} VND</p>
-                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
-                        <button class="view-more">XEM THÊM</button>
+                        <button class="add-to-cart" type="button" data-id="{{ $product->id }}" data-quality="1">THÊM VÀO
+                            GIỎ</button>
+                        <!-- <button class="view-more">XEM THÊM</button> -->
+                        <button class="view-more">
+                            <a href="{{ route('products.detail', $product->id) }}">XEM THÊM</a>
+                        </button>
                     </div>
                 </div>
                 @endforeach
@@ -116,3 +123,36 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Lấy tất cả các nút "Add to Cart"
+        const all_addtocart = document.querySelectorAll('.add-to-cart');
+        // Duyệt qua từng nút
+        all_addtocart.forEach(bt => {
+            bt.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                axios.post("{{ route('add-product-cart') }}", {
+                        product_id: bt.dataset.id,
+                        quality: bt.dataset.quality
+                    })
+                    .then(response => {
+                        // Hiển thị thông tin giỏ hàng sau khi thêm thành công
+                        console.log('Sản phẩm đã được thêm vào giỏ:', response.data);
+                        // Cập nhật số lượng sản phẩm trong giỏ hàng
+                        const cartCountElement = document.querySelector('#tongsoluong');
+                        if (cartCountElement) {
+                            cartCountElement.innerText = response.data.cartCount;
+                        }
+                    })
+                    .catch(error => {
+                        // Xử lý lỗi khi thêm sản phẩm vào giỏ hàng
+                        console.error('Lỗi khi thêm vào giỏ hàng:', error.response ? error
+                            .response.data : error.message);
+                    });
+            });
+        });
+    });
+</script>
+@endpush

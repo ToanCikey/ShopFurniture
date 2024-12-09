@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+Detail Order
+@endsection
 @section('content')
 <style>
     body {

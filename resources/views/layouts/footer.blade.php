@@ -58,9 +58,9 @@
             <!-- Contact Info -->
             <div class="col-md-3 mb-3 mb-md-0">
                 <h5 class="text-uppercase fw-bold mb-3">Contact</h5>
-                <p><i class="fas fa-map-marker-alt me-2"></i> 123 Furniture St, NY 10012, USA</p>
+                <p><i class="fas fa-map-marker-alt me-2"></i>180 Cao Lỗ, Phường 4, Quận 8, Thành Phố Hồ Chí Minh</p>
                 <p><i class="fas fa-envelope me-2"></i> support@furniturehub.com</p>
-                <p><i class="fas fa-phone me-2"></i> +1 234 567 890</p>
+                <p><i class="fas fa-phone me-2"></i> 84+ 09878798</p>
             </div>
         </div>
 

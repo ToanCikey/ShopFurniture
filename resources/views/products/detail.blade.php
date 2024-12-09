@@ -1,4 +1,7 @@
     @extends('layouts.app')
+    @section('title')
+    Detail
+    @endsection
     @section('content')
     <div class="container mt-5">
         <div class="title">PRODUCT DETAIL</div>
@@ -33,5 +36,5 @@
                 </div>
             </div>
         </div>
-        @endsection
     </div>
+    @endsection

@@ -1068,3 +1068,69 @@ footer .text-center {
         margin-bottom: 1rem;
     }
 }
+/* about  */
+.about_section {
+    background-color: #f9f9f9;
+}
+
+.about_section .row {
+    display: flex;
+    align-items: center;
+    margin: 0 80px;
+}
+
+.about_section .detail-box {
+    flex: 1;
+    padding-right: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.about_section .heading_container h2 {
+    background-color: #0a97b0;
+
+    color: #ffffff;
+
+    padding: 10px;
+
+    border-radius: 5px;
+}
+
+.about_section .img-box {
+    flex: 1;
+    position: relative;
+}
+
+.about_section .img-box img {
+    max-width: 100%;
+
+    /* Đường viền màu */
+    border-radius: 8px;
+    /* Bo góc hình ảnh */
+}
+
+.about_section .detail-box p {
+    color: #1f1f1f;
+    margin-top: 15px;
+    font-size: 16px;
+    /* Tăng kích thước chữ */
+    line-height: 1.6;
+    /* Tăng khoảng cách dòng */
+}
+
+.about_section .detail-box a {
+    display: inline-block;
+    padding: 10px 45px;
+    background-color: #0a97b0;
+    color: #ffffff;
+    border-radius: 0px;
+    transition: all 0.3s;
+    border: none;
+    margin-top: 15px;
+}
+
+.about_section .detail-box a:hover {
+    background-color: #087a8a;
+    /* Đổi màu khi hover */
+    transform: scale(1.05);
+    /* Phóng to nhẹ */
+}

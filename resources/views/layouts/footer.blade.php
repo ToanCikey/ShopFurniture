@@ -1,10 +1,10 @@
 <!-- Footer -->
-<footer class="bg-dark text-light py-5">
+<footer class="text-light py-5" style="background-color: #949ca5;">
     <div class="container-fluid ">
         <!-- Top Section -->
-        <div class="row align-items-center mb-5">
+        <div class="row align-items-center mb-5" style="border-bottom: 1px solid;">
             <div class="col-md-6">
-                <h3 class="fw-bold" style=" margin-left: 50px;">FurnitureHub</h3>
+                <h3 class="fw-bold" style=" margin-left: 50px; color: black;">FurnitureHub</h3>
                 <p style=" margin-left: 50px;">Your trusted destination for premium furniture.</p>
             </div>
             <div class="col-md-6">
@@ -27,7 +27,7 @@
         <div class="row text-md-start text-center">
             <!-- Quick Links -->
             <div class="col-md-3 mb-3 mb-md-0">
-                <h5 class="text-uppercase fw-bold mb-3" style=" margin-left: 50px;">Quick Links</h5>
+                <h5 class="text-uppercase fw-bold mb-3" style=" margin-left: 50px; color: black;">Quick Links</h5>
                 <ul class="list-unstyled" style=" margin-left: 50px;">
                     <li><a href="#" class="text-reset text-decoration-none">Home</a></li>
                     <li><a href="#" class="text-reset text-decoration-none">Shop</a></li>
@@ -37,7 +37,7 @@
             </div>
             <!-- Categories -->
             <div class="col-md-3 mb-3 mb-md-0">
-                <h5 class="text-uppercase fw-bold mb-3">Categories</h5>
+                <h5 class="text-uppercase fw-bold mb-3" style="color: black;">Categories</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-reset text-decoration-none">Living Room</a></li>
                     <li><a href="#" class="text-reset text-decoration-none">Bedroom</a></li>
@@ -47,7 +47,7 @@
             </div>
             <!-- Policies -->
             <div class="col-md-3 mb-3 mb-md-0">
-                <h5 class="text-uppercase fw-bold mb-3">Policies</h5>
+                <h5 class="text-uppercase fw-bold mb-3" style="color: black;">Policies</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-reset text-decoration-none">Return Policy</a></li>
                     <li><a href="#" class="text-reset text-decoration-none">Shipping</a></li>
@@ -57,7 +57,7 @@
             </div>
             <!-- Contact Info -->
             <div class="col-md-3 mb-3 mb-md-0">
-                <h5 class="text-uppercase fw-bold mb-3">Contact</h5>
+                <h5 class="text-uppercase fw-bold mb-3" style="color: black;">Contact</h5>
                 <p><i class="fas fa-map-marker-alt me-2"></i>180 Cao Lỗ, Phường 4, Quận 8, Thành Phố Hồ Chí Minh</p>
                 <p><i class="fas fa-envelope me-2"></i> support@furniturehub.com</p>
                 <p><i class="fas fa-phone me-2"></i> 84+ 09878798</p>

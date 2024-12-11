@@ -70,7 +70,7 @@ Cart
         <div class="col-lg-12">
             <div class="card" style="min-width: 1200px;">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" style="padding: 30px;">
                         <h5>Thông Tin Người Nhận</h5>
                         <form action="{{ route('checkout') }}" method="POST">
                             @csrf
@@ -150,31 +150,31 @@ Cart
 
 @push('script')
 <script>
-    const deleteCart = document.querySelectorAll('.delete-item');
-    deleteCart.forEach(deletes => {
-        deletes.addEventListener('click', () => {
-            axios.delete("{{route('delete-product-cart')}}", {
-                    params: {
-                        id: deletes.dataset.productId
-                    }
-                })
-                .then(res => {
-                    window.location.reload();
-                })
-        });
+const deleteCart = document.querySelectorAll('.delete-item');
+deleteCart.forEach(deletes => {
+    deletes.addEventListener('click', () => {
+        axios.delete("{{route('delete-product-cart')}}", {
+                params: {
+                    id: deletes.dataset.productId
+                }
+            })
+            .then(res => {
+                window.location.reload();
+            })
     });
+});
 
-    const inputQuality = document.querySelectorAll('.quality');
-    inputQuality.forEach(inp => {
-        inp.addEventListener('change', (e) => {
-            axios.post("{{ route('update-product-cart')}}", {
-                    product_id: inp.dataset.product,
-                    quality: e.target.value
-                })
-                .then(res => {
-                    window.location.reload();
-                });
-        });
+const inputQuality = document.querySelectorAll('.quality');
+inputQuality.forEach(inp => {
+    inp.addEventListener('change', (e) => {
+        axios.post("{{ route('update-product-cart')}}", {
+                product_id: inp.dataset.product,
+                quality: e.target.value
+            })
+            .then(res => {
+                window.location.reload();
+            });
     });
+});
 </script>
 @endpush

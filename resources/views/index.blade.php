@@ -49,21 +49,20 @@ Furniture
     <!-- main content -->
 
     <!-- card1 -->
-    <div class="container">
+    <div class="container containers">
         <h3 class="text-center" style="padding-top: 30px;">TIN TỨC</h3>
         <div class="row" style="margin-top: 50px;">
             @foreach ($blogs as $blog)
             <div class="col-md-4 py-3 py-md-0">
                 <div class="card" style="height: 400px;">
                     <img src="{{ asset('assets/image/blogs/' . $blog->image) }}" alt="" class="card-img-top"
-                        style="height: 200px; object-fit: cover;">
+                        style="height: 500px; object-fit: cover;">
                     <div class="card-body">
-                        <!-- Hiển thị ngày tháng theo định dạng mong muốn -->
-                        <p class="card-text" style="padding-left: 14px; font-size: 14px; color: #6c757d;">
+                        <p class="card-text" style="font-size: 14px; color: #6c757d;">
                             {{ \Carbon\Carbon::parse($blog->created_at)->format('d/m/Y H:i') }}
                         </p>
-                        <p class="text-center" style="font-weight: bold; font-size: 18px;">{{ $blog->title }}</p>
-                        <div id="btn2" class="text-center mt-3">
+                        <p class="" style="font-weight: bold; font-size: 18px;">{{ $blog->title }}</p>
+                        <div id="btn2" class="">
                             <a href="{{ route('blogs.show', $blog->id) }}" class="btn btn-primary">
                                 Xem Thêm
                             </a>
@@ -122,89 +121,16 @@ Furniture
         </div>
         {{ $products->links() }}
     </div>
-
-    <!-- card3 -->
-
-    <!-- about -->
-    <!-- <div class="container">
-        <h1 class="text-center" style="margin-top: 50px;">ABOUT</h1>
-        <div class="row" style="margin-top: 50px;">
-            <div class="col-md-6 py-3 py-md-0">
-                <div class="card">
-                    <img src="{{ asset('assets/image/about.png') }}" alt="">
-                </div>
-            </div>
-            <div class="col-md-6 py-3 py-md-0">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum, saepe possimus quo, quasi animi
-                    natus nulla beatae neque soluta pariatur id ducimus eum, sed quis enim minima? Fugiat delectus quo
-                    optio nemo voluptatem ullam officiis neque exercitationem tenetur eum corporis quas in esse
-                    blanditiis, quasi animi nam eos! Tempora deleniti eligendi magni ex voluptatum ut dicta nemo et
-                    consequuntur distinctio quae atque porro inventore assumenda, nihil odio iusto accusamus libero
-                    error nam aut, at praesentium cum reiciendis. Possimus consequatur obcaecati at illum in dolores
-                    earum vero ipsum. Ipsam vitae adipisci corrupti totam vel consequuntur fugiat. Perferendis fuga
-                    doloremque tempora, in eos, voluptates iure, optio qui modi ex ea saepe. Eum perspiciatis,
-                    voluptates fugiat nesciunt corrupti minima aliquam repellat, ea quasi natus, recusandae aut nobis
-                    modi. Commodi, alias reiciendis reprehenderit hic soluta consectetur corporis accusantium placeat,
-                    totam minima nostrum magnam dolorum aut dolore, sapiente ea. Magni est quo ipsam nisi iste.</p>
-                <div id="btn4"><button>Read More...</button></div>
-            </div>
-        </div>
-    </div> -->
-    <div class="container">
-        <section class="about_section layout_padding-bottom" style="margin-left: 80px;">
-            <div class="container  ">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="detail-box">
-                            <div class="heading_container">
-                                <h2>
-                                    Vẻ Đẹp Từ <span>Nội Thất</span>
-                                </h2>
-                            </div>
-                            <p>
-                                Nội thất không chỉ là những vật dụng hữu ích trong cuộc sống hàng ngày mà còn đóng vai
-                                trò quan trọng trong việc nâng cao tính thẩm mỹ của không gian sống. Một căn phòng được
-                                bài trí hài hòa và tinh tế sẽ mang lại cảm giác dễ chịu và thư giãn cho người ở, biến
-                                mỗi căn nhà trở thành tổ ấm thật sự. Sự lựa chọn nội thất phù hợp còn thể hiện được cá
-                                tính và phong cách sống của chủ nhân, tạo nên dấu ấn riêng biệt.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 ">
-                        <div class="img-box">
-                            <img src="assets/image/card8.png" alt="">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-6 ">
-                        <div class="img-box">
-                            <img src="assets/image/card8.png" alt="">
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="detail-box">
-                            <div class="heading_container">
-                                <h2>
-                                    Vẻ Đẹp Từ <span>Nội Thất</span>
-                                </h2>
-                            </div>
-                            <p>
-                                Nội thất không chỉ là những vật dụng hữu ích trong cuộc sống hàng ngày mà còn đóng vai
-                                trò quan trọng trong việc nâng cao tính thẩm mỹ của không gian sống. Một căn phòng được
-                                bài trí hài hòa và tinh tế sẽ mang lại cảm giác dễ chịu và thư giãn cho người ở, biến
-                                mỗi căn nhà trở thành tổ ấm thật sự. Sự lựa chọn nội thất phù hợp còn thể hiện được cá
-                                tính và phong cách sống của chủ nhân, tạo nên dấu ấn riêng biệt.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+    <h3 class="text-center" style="padding-top: 30px;">VẺ ĐẸP CỦA NỘI THẤT</h3>
+    <div class="container-custom">
+        <div class="image-box"><img src="assets/image/about.png" alt="Image 1"></div>
+        <div class="image-box"><img src="assets/image/c1.png" alt="Image 2"></div>
+        <div class="image-box"><img src="assets/image/c2.png" alt="Image 3"></div>
+        <div class="image-box"><img src="assets/image/c3.png" alt="Image 4"></div>
+        <div class="image-box"><img src="assets/image/background.png" alt="Image 5"></div>
     </div>
+
+
 </div>
 
 @endsection

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ManagerBlogController extends Controller
 {
     public function index(){
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(4);
         return view('admin.blog.managerblog')->with("blogs", $blogs);
     }
 
@@ -42,7 +42,7 @@ class ManagerBlogController extends Controller
     return redirect()->route('admin.blog.managerblog')->with('success', 'Bài viết đã được thêm thành công!');
     }
 
-     public function destroy($id){
+    public function destroy($id){
         $blog = Blog::findOrFail($id);
         if ($blog->image && file_exists(public_path('assets/image/blogs/' . $blog->image))) {
                 unlink(public_path('assets/image/blogs/' . $blog->image));

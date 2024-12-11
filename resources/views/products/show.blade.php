@@ -3,9 +3,8 @@
 Product
 @endsection
 @section('content')
-
 <div class="container" style="margin-top: 85px;">
-    @if(session('message'))
+    @if (session('message'))
     <div class="alert alert-warning">
         {{ session('message') }}
     </div>
@@ -97,7 +96,8 @@ Product
                 @foreach ($products as $product)
                 <div class="col-md-4 mb-4 show-border">
                     <div class="product-image">
-                        <img src="{{ asset($product->productImages->first()->imageURL) }}" alt="{{ $product->name }}">
+                        <img src="{{ asset('assets/image/product_imgae/' . $product->productImages->first()->imageURL) }}"
+                            alt="{{ $product->name }}">
                     </div>
                     <div class="product-info">
                         <h3>{{ $product->name }}</h3>

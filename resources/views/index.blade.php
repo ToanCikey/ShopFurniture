@@ -47,7 +47,6 @@ Furniture
     </div>
 
     <!-- main content -->
-
     <!-- card1 -->
     <div class="container containers">
         <h3 class="text-center" style="padding-top: 30px;">TIN TỨC</h3>
@@ -98,7 +97,8 @@ Furniture
             <div class="col-md-3 show-border">
                 <a href="{{ route('products.detail', $product->id) }}" class="text-decoration-none text-dark">
                     <div class="product-image">
-                        <img src="{{ asset($product->productImages->first()->imageURL) }}" alt="Tủ áo Maxine">
+                        <img src="{{ asset('assets/image/product_imggae/' . $product->productImages->first()->imageURL) }}"
+                            alt="Tủ áo Maxine">
                     </div>
                     <div class="product-info">
                         <h3>{{ $product->name }}</h3>
@@ -109,7 +109,8 @@ Furniture
                             </p>
                         </div>
                         <!-- <input type="hidden" class="quality" value="1"> -->
-                        <button class="add-to-cart" type="button" data-id="{{ $product->id }}" data-quality="1">THÊM VÀO
+                        <button class="add-to-cart" type="button" data-id="{{ $product->id }}" data-quality="1">THÊM
+                            VÀO
                             GIỎ</button>
                         <button class="view-more">
                             <a href="{{ route('products.detail', $product->id) }}">XEM THÊM</a>
@@ -132,7 +133,6 @@ Furniture
 
 
 </div>
-
 @endsection
 @push('scripts')
 <script>

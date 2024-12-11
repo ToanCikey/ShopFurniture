@@ -111,13 +111,17 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
     // Quản lý đơn hàng
     Route::prefix('order')->name('order.')->group(function () {
         Route::get('/', [ManagerOrderController::class, 'index'])->name('managerorder');
-        Route::get('/{id}', [ManagerOrderController::class, 'show'])->name('show');
+        Route::get('/show/{id}', [ManagerOrderController::class, 'show'])->name('managerorder.show');
+        Route::delete('/{id}', [ManagerOrderController::class, 'destroy'])->name('managerorder.destroy');
+        Route::get('/{id}/edit', [ManagerOrderController::class, 'edit'])->name('managerorder.edit');
+        Route::put('/{id}', [ManagerOrderController::class, 'update'])->name('managerorder.update');
     });
     // Quản lý sản phẩm
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ManagerProductController::class, 'index'])->name('managerproduct');
         Route::get('/create', [ManagerProductController::class, 'create'])->name('managerproduct.create');
         Route::post('/', [ManagerProductController::class, 'store'])->name('managerproduct.store');
+        Route::delete('/{id}', [ManagerProductController::class, 'destroy'])->name('managerproduct.destroy');
     });
     // Quản lý danh mục sản phẩm
     Route::prefix('category')->name('category.')->group(function () {
@@ -132,13 +136,9 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
 
 
 // login by gg
-
-
 Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);
 
-Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('auth.google');
-Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);
 
 //login by fb
 Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook'])->name('auth.facebook');

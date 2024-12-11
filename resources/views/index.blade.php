@@ -97,8 +97,9 @@ Furniture
             <div class="col-md-3 show-border">
                 <a href="{{ route('products.detail', $product->id) }}" class="text-decoration-none text-dark">
                     <div class="product-image">
-                        <img src="{{ asset('assets/image/product_imggae/' . $product->productImages->first()->imageURL) }}"
-                            alt="Tủ áo Maxine">
+                        <!-- <img src="{{ asset('assets/image/product_image/' . $product->productImages->first()->imageURL) }}"
+                            alt="Tủ áo Maxine"> -->
+                        <img src="/assets/image/product_image/sofa-chinh.jpg" alt="Tủ áo Maxine">
                     </div>
                     <div class="product-info">
                         <h3>{{ $product->name }}</h3>

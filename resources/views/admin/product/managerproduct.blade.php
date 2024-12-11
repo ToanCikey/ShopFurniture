@@ -37,7 +37,8 @@
                             <td>{{ $product->brand }}</td>
                             <td class="d-flex" style="gap: 10px">
                                 <a href="" class="btn btn-warning">Update</a>
-                                <form action="" method="POST">
+                                <form action="{{ route('admin.product.managerproduct.destroy', $product->id) }}"
+                                    method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Xóa</button>

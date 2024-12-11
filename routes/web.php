@@ -120,6 +120,7 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
         Route::get('/', [ManagerProductController::class, 'index'])->name('managerproduct');
         Route::get('/create', [ManagerProductController::class, 'create'])->name('managerproduct.create');
         Route::post('/', [ManagerProductController::class, 'store'])->name('managerproduct.store');
+        Route::delete('/{id}', [ManagerProductController::class, 'destroy'])->name('managerproduct.destroy');
     });
     // Quản lý danh mục sản phẩm
     Route::prefix('category')->name('category.')->group(function () {

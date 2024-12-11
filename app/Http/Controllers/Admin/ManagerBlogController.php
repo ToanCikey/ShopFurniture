@@ -42,7 +42,7 @@ class ManagerBlogController extends Controller
     return redirect()->route('admin.blog.managerblog')->with('success', 'Bài viết đã được thêm thành công!');
     }
 
-     public function destroy($id){
+    public function destroy($id){
         $blog = Blog::findOrFail($id);
         if ($blog->image && file_exists(public_path('assets/image/blogs/' . $blog->image))) {
                 unlink(public_path('assets/image/blogs/' . $blog->image));

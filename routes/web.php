@@ -110,7 +110,10 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
     // Quản lý đơn hàng
     Route::prefix('order')->name('order.')->group(function () {
         Route::get('/', [ManagerOrderController::class, 'index'])->name('managerorder');
-        Route::get('/{id}', [ManagerOrderController::class, 'show'])->name('show');
+        Route::get('/show/{id}', [ManagerOrderController::class, 'show'])->name('managerorder.show');
+        Route::delete('/{id}', [ManagerOrderController::class, 'destroy'])->name('managerorder.destroy');
+        Route::get('/{id}/edit', [ManagerOrderController::class, 'edit'])->name('managerorder.edit');
+        Route::put('/{id}', [ManagerOrderController::class, 'update'])->name('managerorder.update');
     });
     // Quản lý sản phẩm
     Route::prefix('product')->name('product.')->group(function () {

@@ -10,7 +10,7 @@ class ManagerOrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::paginate(4);
         return view('admin.order.managerorder')->with("orders", $orders);
     }
 }

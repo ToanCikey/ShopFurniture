@@ -129,13 +129,9 @@ Route::middleware(['auth', AuthAdmin::class])->prefix('admin')->name('admin.')->
 
 
 // login by gg
-
-
 Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);
 
-Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('auth.google');
-Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);
 
 //login by fb
 Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook'])->name('auth.facebook');

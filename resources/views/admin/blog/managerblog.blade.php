@@ -45,6 +45,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center">
+                {{ $blogs->links() }}
+            </div>
         </div>
     </div>
 @endsection

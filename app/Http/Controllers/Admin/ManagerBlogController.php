@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ManagerBlogController extends Controller
 {
     public function index(){
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(4);
         return view('admin.blog.managerblog')->with("blogs", $blogs);
     }
 

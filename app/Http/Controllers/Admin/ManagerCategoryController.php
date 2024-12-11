@@ -11,7 +11,7 @@ class ManagerCategoryController extends Controller
 {
     public function index()
     {
-        $categorys = Category::all();
+        $categorys = Category::paginate(4);
         return view('admin.category.managercategory')->with("categorys", $categorys);
     }
 

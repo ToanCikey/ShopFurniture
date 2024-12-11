@@ -58,6 +58,9 @@ class OrderController extends Controller
         if ($request->input('paymentMethod') === 'momo') {
             return $this->momo_payment($request);
         }
+        if ($request->input('paymentMethod') === 'vnpay') {
+            return $this->vnpay_payment($request);
+        }
         // Chuyển hướng đến trang đơn hàng
         return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
     }

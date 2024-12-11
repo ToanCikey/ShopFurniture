@@ -79,6 +79,8 @@ Route::get('/orderAlter', [OrderController::class, 'success'])->name('order.succ
 
 //momo
 Route::post('/momo_payment', [OrderController::class, 'momo_payment'])->name('momo_payment');
+//vnpay
+
 
 //contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');

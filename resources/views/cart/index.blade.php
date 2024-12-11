@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+Cart
+@endsection
 @section('content')
 <div class="container px-4 py-5 mx-auto" style="margin-top: 55px; width: 1320px;">
     <div class="row d-flex justify-content-center" style="width: 100%;">
@@ -92,30 +94,26 @@
 
                                 <div class="col-lg-5">
                                     <h5>Phương Thức Thanh Toán</h5>
-                                    <div class="form-check">
-                                        <input type="hidden" name="total_momo" value="{{ $total }}">
-                                        <input type="radio" class="form-check-input" id="momoRadio" name="paymentMethod"
-                                            value="momo" required>
-                                        <label class="form-check-label" for="momoRadio">MOMO</label>
+                                    <div class="row px-2">
+                                        <div class="form-check"
+                                            style="display: flex; align-items: center; margin: 10px 0;">
+                                            <input type="radio" class="form-check-input" id="momoRadio"
+                                                name="paymentMethod" value="momo" required style="margin-right: 10px;">
+                                            <label class="form-check-label" for="momoRadio"
+                                                style="display: flex; align-items: center; cursor: pointer;">
+                                                <img src="assets/image/momo.jpg" alt="MOMO"
+                                                    style="width: 40px; height: 40px; margin-right: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                                            </label>
+                                        </div>
+
                                     </div>
 
                                     <div class="row px-2">
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="zalopayRadio"
-                                                name="paymentMethod" value="zalopay">
-                                            <label class="form-check-label" for="zalopayRadio">ZaloPay</label>
-                                        </div>
-                                        <div class="form-group" id="zalopayDetails" style="display: none;">
-                                            <label class="form-control-label">Số Điện Thoại ZaloPay</label>
-                                            <input type="tel" id="zaloPhone" name="zaloPhone"
-                                                placeholder="Nhập số điện thoại ZaloPay" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row px-2">
-                                        <div class="form-check">
                                             <input type="radio" class="form-check-input" id="codRadio"
                                                 name="paymentMethod" value="cod">
-                                            <label class="form-check-label" for="codRadio">Thanh toán khi nhận
+                                            <label class="form-check-label" for="codRadio"
+                                                style="margin-left: 15px;">Thanh toán khi nhận
                                                 hàng</label>
                                         </div>
                                     </div>
@@ -134,7 +132,7 @@
                                         <p class="mb-1 text-left">Tổng tiền</p>
                                         <h6 class="mb-1 text-right">{{ number_format($total) }} VNĐ</h6>
                                     </div>
-                                    <button type="submit" class="btn-block btn-blue">
+                                    <button type="submit" name="redirect" class="btn-block btn-blue">
                                         <span>
                                             <span id="checkout">Thanh Toán</span>
                                         </span>
@@ -152,31 +150,31 @@
 
 @push('script')
 <script>
-const deleteCart = document.querySelectorAll('.delete-item');
-deleteCart.forEach(deletes => {
-    deletes.addEventListener('click', () => {
-        axios.delete("{{route('delete-product-cart')}}", {
-                params: {
-                    id: deletes.dataset.productId
-                }
-            })
-            .then(res => {
-                window.location.reload();
-            })
+    const deleteCart = document.querySelectorAll('.delete-item');
+    deleteCart.forEach(deletes => {
+        deletes.addEventListener('click', () => {
+            axios.delete("{{route('delete-product-cart')}}", {
+                    params: {
+                        id: deletes.dataset.productId
+                    }
+                })
+                .then(res => {
+                    window.location.reload();
+                })
+        });
     });
-});
 
-const inputQuality = document.querySelectorAll('.quality');
-inputQuality.forEach(inp => {
-    inp.addEventListener('change', (e) => {
-        axios.post("{{ route('update-product-cart')}}", {
-                product_id: inp.dataset.product,
-                quality: e.target.value
-            })
-            .then(res => {
-                window.location.reload();
-            });
+    const inputQuality = document.querySelectorAll('.quality');
+    inputQuality.forEach(inp => {
+        inp.addEventListener('change', (e) => {
+            axios.post("{{ route('update-product-cart')}}", {
+                    product_id: inp.dataset.product,
+                    quality: e.target.value
+                })
+                .then(res => {
+                    window.location.reload();
+                });
+        });
     });
-});
 </script>
 @endpush

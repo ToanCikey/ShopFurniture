@@ -18,13 +18,7 @@
                         <a class="nav-link text-white fw-bold px-3" href="{{route('products.show')}}">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fw-bold px-3" href="#">Top Chair</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white fw-bold px-3" href="#">Chair</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white fw-bold px-3" href="#">Brands</a>
+                        <a class="nav-link text-white fw-bold px-3" href="#">Tin Tức</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold px-3" href="{{route('contact')}}">Liên Hệ</a>

@@ -80,22 +80,23 @@ class LoginGoogleController extends Controller
 
      */
 
-    public function handleGoogleCallback(){
+    public function handleGoogleCallback()
+    {
         $user = Socialite::driver('google')->user();
         try {
             $user = Socialite::driver('google')->user();
             $finduser = User::where('google_id', $user->id)->first();
-            if($finduser){
+            if ($finduser) {
                 Auth::login($finduser);
                 return redirect()->intended('/');
-            }else{
+            } else {
                 $newUser = User::create([
-                        'email' => $user->email,
-                        'name' => $user->name,
-                        'google_id'=> $user->id,
-                        'password' => Hash::make('123456789'),
-                        'role' => 'USR'
-                    ]);
+                    'email' => $user->email,
+                    'name' => $user->name,
+                    'google_id' => $user->id,
+                    'password' => Hash::make('123456789'),
+                    'role' => 'USR'
+                ]);
                 Auth::login($newUser);
                 return redirect()->intended('/');
             }

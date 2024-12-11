@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+Order Success
+@endsection
 @section('content')
 <style>
     .thank-you-container {

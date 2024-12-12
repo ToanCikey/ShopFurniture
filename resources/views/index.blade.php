@@ -97,9 +97,8 @@ Furniture
             <div class="col-md-3 show-border">
                 <a href="{{ route('products.detail', $product->id) }}" class="text-decoration-none text-dark">
                     <div class="product-image">
-                        <!-- <img src="{{ asset('assets/image/product_image/' . $product->productImages->first()->imageURL) }}"
-                            alt="Tủ áo Maxine"> -->
-                        <img src="/assets/image/product_image/sofa-chinh.jpg" alt="Tủ áo Maxine">
+                        <img src="{{ asset('assets/image/product_image/' . $product->productImages->first()->imageURL) }}"
+                            alt="Tủ áo Maxine">
                     </div>
                     <div class="product-info">
                         <h3>{{ $product->name }}</h3>
@@ -151,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(response => {
                     // Hiển thị thông tin giỏ hàng sau khi thêm thành công
-                    console.log('Sản phẩm đã được thêm vào giỏ:', response.data);
+                    alert(response.data.message);
                     // Cập nhật số lượng sản phẩm trong giỏ hàng
                     const cartCountElement = document.querySelector('#tongsoluong');
                     if (cartCountElement) {

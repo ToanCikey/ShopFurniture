@@ -96,7 +96,7 @@ Product
                 @foreach ($products as $product)
                 <div class="col-md-4 mb-4 show-border">
                     <div class="product-image">
-                        <img src="{{ asset('assets/image/product_imgae/' . $product->productImages->first()->imageURL) }}"
+                        <img src="{{ asset('assets/image/product_image/' . $product->productImages->first()->imageURL) }}"
                             alt="{{ $product->name }}">
                     </div>
                     <div class="product-info">
@@ -126,34 +126,34 @@ Product
 @endsection
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Lấy tất cả các nút "Add to Cart"
-    const all_addtocart = document.querySelectorAll('.add-to-cart');
-    // Duyệt qua từng nút
-    all_addtocart.forEach(bt => {
-        bt.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            axios.post("{{ route('add-product-cart') }}", {
-                    product_id: bt.dataset.id,
-                    quality: bt.dataset.quality
-                })
-                .then(response => {
-                    // Hiển thị thông tin giỏ hàng sau khi thêm thành công
-                    console.log('Sản phẩm đã được thêm vào giỏ:', response.data);
-                    // Cập nhật số lượng sản phẩm trong giỏ hàng
-                    const cartCountElement = document.querySelector('#tongsoluong');
-                    if (cartCountElement) {
-                        cartCountElement.innerText = response.data.cartCount;
-                    }
-                })
-                .catch(error => {
-                    // Xử lý lỗi khi thêm sản phẩm vào giỏ hàng
-                    console.error('Lỗi khi thêm vào giỏ hàng:', error.response ? error
-                        .response.data : error.message);
-                });
+    document.addEventListener('DOMContentLoaded', () => {
+        // Lấy tất cả các nút "Add to Cart"
+        const all_addtocart = document.querySelectorAll('.add-to-cart');
+        // Duyệt qua từng nút
+        all_addtocart.forEach(bt => {
+            bt.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                axios.post("{{ route('add-product-cart') }}", {
+                        product_id: bt.dataset.id,
+                        quality: bt.dataset.quality
+                    })
+                    .then(response => {
+                        // Hiển thị thông tin giỏ hàng sau khi thêm thành công
+                        console.log('Sản phẩm đã được thêm vào giỏ:', response.data);
+                        // Cập nhật số lượng sản phẩm trong giỏ hàng
+                        const cartCountElement = document.querySelector('#tongsoluong');
+                        if (cartCountElement) {
+                            cartCountElement.innerText = response.data.cartCount;
+                        }
+                    })
+                    .catch(error => {
+                        // Xử lý lỗi khi thêm sản phẩm vào giỏ hàng
+                        console.error('Lỗi khi thêm vào giỏ hàng:', error.response ? error
+                            .response.data : error.message);
+                    });
+            });
         });
     });
-});
 </script>
 @endpush

@@ -54,10 +54,11 @@ Cart
                         <div class="d-flex flex-column plus-minus">
                             <input type="number" class="quality" data-product="{{$item['id']}}"
                                 value="{{$item['quality']}}">
+
                         </div>
                     </div>
                 </div>
-                <div class="col-4" style="display: flex; justify-content: space-between;">
+                <div class="col-4" style="display: flex; justify-content: space-between; cursor: pointer;">
                     <h6 class="mob-text">{{number_format($item['price'] * $item['quality'])}} VNĐ</h6>
                     <i class="fa-solid fa-trash delete-item" data-product-id="{{$item['id']}}"></i>
                 </div>
@@ -150,31 +151,52 @@ Cart
 
 @push('script')
 <script>
-const deleteCart = document.querySelectorAll('.delete-item');
-deleteCart.forEach(deletes => {
-    deletes.addEventListener('click', () => {
-        axios.delete("{{route('delete-product-cart')}}", {
-                params: {
-                    id: deletes.dataset.productId
-                }
-            })
-            .then(res => {
-                window.location.reload();
-            })
+    const deleteCart = document.querySelectorAll('.delete-item');
+    deleteCart.forEach(deletes => {
+        deletes.addEventListener('click', () => {
+            axios.delete("{{route('delete-product-cart')}}", {
+                    params: {
+                        id: deletes.dataset.productId
+                    }
+                })
+                .then(res => {
+                    window.location.reload();
+                })
+        });
     });
-});
 
-const inputQuality = document.querySelectorAll('.quality');
-inputQuality.forEach(inp => {
-    inp.addEventListener('change', (e) => {
-        axios.post("{{ route('update-product-cart')}}", {
-                product_id: inp.dataset.product,
-                quality: e.target.value
-            })
-            .then(res => {
-                window.location.reload();
-            });
+    // const inputQuality = document.querySelectorAll('.quality');
+    // inputQuality.forEach(inp => {
+    //     inp.addEventListener('change', (e) => {
+    //         axios.post("{{ route('update-product-cart')}}", {
+    //                 product_id: inp.dataset.product,
+    //                 quality: e.target.value
+    //             })
+    //             .then(res => {
+    //                 window.location.reload();
+    //             });
+    //     });
+    // });
+    const inputQuality = document.querySelectorAll('.quality');
+    inputQuality.forEach(inp => {
+        inp.addEventListener('change', (e) => {
+            const newQuality = e.target.value;
+            if (newQuality < 1) { // Kiểm tra số lượng phải lớn hơn hoặc bằng 1
+                alert('Số lượng phải lớn hơn 0');
+                return; // Không thực hiện yêu cầu nếu số lượng không hợp lệ
+            }
+
+            axios.post("{{ route('update-product-cart') }}", {
+                    product_id: inp.dataset.product,
+                    quality: newQuality
+                })
+                .then(res => {
+                    window.location.reload(); // Tải lại trang để cập nhật giỏ hàng
+                })
+                .catch(error => {
+                    console.error('Có lỗi xảy ra:', error);
+                });
+        });
     });
-});
 </script>
 @endpush

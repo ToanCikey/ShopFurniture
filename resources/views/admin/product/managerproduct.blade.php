@@ -11,7 +11,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <a class="btn btn-success" href="">Thêm Product</a>
+            <a class="btn btn-success" href="{{ route('admin.product.managerproduct.create') }}">Thêm Product</a>
             <table class="table table-hover table-bordered mt-3">
                 <thead>
                     <tr>

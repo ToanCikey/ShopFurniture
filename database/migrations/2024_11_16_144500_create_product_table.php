@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('sold');
             $table->string('material');
             $table->unsignedBigInteger('category_id');
+            $table->timestamps();
             $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
         });
     }

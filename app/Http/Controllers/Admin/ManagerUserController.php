@@ -48,8 +48,8 @@ class ManagerUserController extends Controller
     $user->save();
 
     return redirect()->route('admin.user.manageruser')->with('success', 'Tài khoản đã được thêm thành công!');
-    
     }
+
     public function destroy($id){
         $user = User::findOrFail($id);
         if ($user->image && file_exists(public_path('assets/image/user/' . $user->image))) {

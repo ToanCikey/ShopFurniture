@@ -45,8 +45,11 @@ class ProductController extends Controller
     public function detail($id)
     {
         $product = Product::with('productImages', 'category')->findOrFail($id);
-
-        return view('products.detail', compact('product'));
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $id)
+            ->take(4)
+            ->get();
+        return view('products.detail', compact('product', 'relatedProducts'));
     }
     public function search(Request $request)
     {

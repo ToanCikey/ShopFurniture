@@ -32,6 +32,10 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
         if (isset($cart[$product_id])) {
             $cart[$product_id]['quality'] += $quality;
+            return response()->json([
+                'message' => 'Sản phẩm đã có trong giỏ hàng.',
+                'cartCount' => count($cart)
+            ], 200);
         } else {
             $cart[$product_id] = [
                 'id' => $product->id,
@@ -48,7 +52,11 @@ class CartController extends Controller
         foreach ($cart as $item) {
             $sum += $item['quality'];
         }
-        return response()->json(['message' => 'cart updated', 'cartCount' => $sum], 200);
+        // return response()->json(['message' => 'cart updated', 'cartCount' => $sum], 200);
+        return response()->json([
+            'message' => 'cart updated',
+            'cartCount' => $sum
+        ], 200);
     }
     public function deleteCart(Request $request)
     {
@@ -61,26 +69,69 @@ class CartController extends Controller
             session()->flash('success', 'Product successfully deleted');
         }
     }
+    // public function updateCart(Request $request)
+    // {
+    //     $product_id = $request->product_id;
+    //     $quality = $request->quality;
+
+    //     $product = Product::find($product_id);
+    //     if ($product == null) {
+    //         return response()->json([
+    //             'error' => "San pham khong tim thay"
+    //         ], 404);
+    //     }
+    //     $cart = session()->get('cart', []);
+    //     if (isset($cart[$product_id])) {
+    //         $cart[$product_id]['quality'] = $quality;
+    //     }
+    //     session()->put('cart', $cart);
+    //     $sum = 0;
+    //     foreach ($cart as $item) {
+    //         $sum += $item['quality'];
+    //     }
+    //     return response()->json(['message' => 'cart updated', 'cartCount' => $sum], 200);
+    // }
     public function updateCart(Request $request)
     {
         $product_id = $request->product_id;
         $quality = $request->quality;
 
+        // Kiểm tra xem sản phẩm có tồn tại trong cơ sở dữ liệu không
         $product = Product::find($product_id);
         if ($product == null) {
             return response()->json([
-                'error' => "San pham khong tim thay"
+                'error' => "Sản phẩm không tìm thấy"
             ], 404);
         }
+
+        // Kiểm tra xem số lượng có hợp lệ không
+        if ($quality < 1) {
+            return response()->json([
+                'error' => "Số lượng phải lớn hơn 0"
+            ], 400);
+        }
+
+        // Lấy giỏ hàng từ session
         $cart = session()->get('cart', []);
+
+        // Cập nhật số lượng sản phẩm trong giỏ hàng
         if (isset($cart[$product_id])) {
             $cart[$product_id]['quality'] = $quality;
+        } else {
+            return response()->json([
+                'error' => "Sản phẩm không có trong giỏ hàng"
+            ], 404);
         }
+
+        // Lưu giỏ hàng vào session
         session()->put('cart', $cart);
-        $sum = 0;
-        foreach ($cart as $item) {
-            $sum += $item['quality'];
-        }
-        return response()->json(['message' => 'cart updated', 'cartCount' => $sum], 200);
+
+        // Tính tổng số lượng sản phẩm trong giỏ hàng
+        $sum = array_sum(array_column($cart, 'quality'));
+
+        return response()->json([
+            'message' => 'Giỏ hàng đã được cập nhật',
+            'cartCount' => $sum
+        ], 200);
     }
 }

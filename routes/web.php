@@ -61,6 +61,7 @@ Route::get('/search', [ProductController::class, 'search'])->name('products.sear
 Route::get('/filterProduct', [ProductController::class, 'filterProduct'])->name('products.filterProduct');
 //Detail Blog
 Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
+Route::get('/blog', [BlogController::class, 'showAll'])->name('blog');
 
 //Cart
 Route::middleware(['auth'])->group(function () {

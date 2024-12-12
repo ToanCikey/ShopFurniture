@@ -54,10 +54,11 @@ Cart
                         <div class="d-flex flex-column plus-minus">
                             <input type="number" class="quality" data-product="{{$item['id']}}"
                                 value="{{$item['quality']}}">
+
                         </div>
                     </div>
                 </div>
-                <div class="col-4" style="display: flex; justify-content: space-between;">
+                <div class="col-4" style="display: flex; justify-content: space-between; cursor: pointer;">
                     <h6 class="mob-text">{{number_format($item['price'] * $item['quality'])}} VNĐ</h6>
                     <i class="fa-solid fa-trash delete-item" data-product-id="{{$item['id']}}"></i>
                 </div>
@@ -70,7 +71,7 @@ Cart
         <div class="col-lg-12">
             <div class="card" style="min-width: 1200px;">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" style="padding: 30px;">
                         <h5>Thông Tin Người Nhận</h5>
                         <form action="{{ route('checkout') }}" method="POST">
                             @csrf
@@ -164,15 +165,36 @@ Cart
         });
     });
 
+    // const inputQuality = document.querySelectorAll('.quality');
+    // inputQuality.forEach(inp => {
+    //     inp.addEventListener('change', (e) => {
+    //         axios.post("{{ route('update-product-cart')}}", {
+    //                 product_id: inp.dataset.product,
+    //                 quality: e.target.value
+    //             })
+    //             .then(res => {
+    //                 window.location.reload();
+    //             });
+    //     });
+    // });
     const inputQuality = document.querySelectorAll('.quality');
     inputQuality.forEach(inp => {
         inp.addEventListener('change', (e) => {
-            axios.post("{{ route('update-product-cart')}}", {
+            const newQuality = e.target.value;
+            if (newQuality < 1) { // Kiểm tra số lượng phải lớn hơn hoặc bằng 1
+                alert('Số lượng phải lớn hơn 0');
+                return; // Không thực hiện yêu cầu nếu số lượng không hợp lệ
+            }
+
+            axios.post("{{ route('update-product-cart') }}", {
                     product_id: inp.dataset.product,
-                    quality: e.target.value
+                    quality: newQuality
                 })
                 .then(res => {
-                    window.location.reload();
+                    window.location.reload(); // Tải lại trang để cập nhật giỏ hàng
+                })
+                .catch(error => {
+                    console.error('Có lỗi xảy ra:', error);
                 });
         });
     });

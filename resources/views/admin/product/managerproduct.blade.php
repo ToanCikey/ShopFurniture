@@ -36,7 +36,8 @@
                             <td>{{ Str::limit($product->detailDescription, 30, '...') }}</td>
                             <td>{{ $product->brand }}</td>
                             <td class="d-flex" style="gap: 10px">
-                                <a href="" class="btn btn-warning">Update</a>
+                                <a href="{{ route('admin.product.managerproduct.edit', $product->id) }}"
+                                    class="btn btn-warning">Update</a>
                                 <form action="{{ route('admin.product.managerproduct.destroy', $product->id) }}"
                                     method="POST">
                                     @csrf

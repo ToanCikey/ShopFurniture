@@ -25,7 +25,7 @@ class ManagerProductController extends Controller
             return redirect()->route('admin.product.managerproduct')->with('error', 'Sản phẩm không có ảnh để xóa.');
         }
         foreach ($productImages as $image) {
-            $imagePath = public_path('assets/image/product_imgae/' . $image->imageURL);
+            $imagePath = public_path('assets/image/product_image/' . $image->imageURL);
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
@@ -83,7 +83,7 @@ class ManagerProductController extends Controller
     if ($request->hasFile('image')) {
     foreach ($request->file('image') as $index => $file) {
         $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
-        $file->move(public_path('assets/image/product_imgae'), $fileName); 
+        $file->move(public_path('assets/image/product_image'), $fileName); 
         $productImage = new ProductImage();
         $productImage->product_id = $product->id;
         $productImage->imageURL = $fileName;
@@ -93,5 +93,73 @@ class ManagerProductController extends Controller
     }
 
     return redirect()->route('admin.product.managerproduct')->with('success', 'Sản phẩm đã được thêm thành công!');
+    }
+
+    public function edit($id){
+        $product = Product::find($id);
+        $categorys = Category::all();
+        $productImages = $product->productImages;
+       return view("admin.product.updateproduct")->with("product",$product)
+                                                 ->with("productImages",$productImages)
+                                                 ->with("categorys",$categorys);
+    }
+
+    public function update(Request $request,$id){
+        $request->validate([
+        'name' => 'required',
+        'price' => 'required|numeric',
+        'quantity' => 'required|integer',
+        'shortDescription' => 'required',
+        'detailDescription' => 'required',
+        'brand' => 'required',
+        'image' => $request->hasFile('image') ? 'required|array' : '',
+        'image.*' => $request->hasFile('image') ? 'image|mimes:jpeg,png,jpg,gif|max:2048' : '',
+        ], [
+        'name.required' => 'Vui lòng nhập tên sản phẩm',
+        'price.required' => 'Vui lòng nhập giá sản phẩm',
+        'price.numeric' => 'Giá phải là một số',
+        'quantity.required' => 'Vui lòng nhập số lượng',
+        'quantity.integer' => 'Số lượng phải là một số nguyên',
+        'shortDescription.required' => 'Vui lòng nhập mô tả ngắn',
+        'detailDescription.required' => 'Vui lòng nhập mô tả chi tiết',
+        'brand.required' => 'Vui lòng nhập thương hiệu',
+        'image.required' => 'Vui lòng chọn ít nhất một ảnh',
+        'image.*.image' => 'Tệp tải lên phải là ảnh',
+        'image.*.mimes' => 'Ảnh chỉ được có định dạng jpeg, png, jpg, gif',
+        'image.*.max' => 'Kích thước ảnh không được vượt quá 2MB',
+        ]);
+
+        $product = Product::find($id);
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+        $product->quantity = $request->input('quantity');
+        $product->shortDescription = $request->input('shortDescription');
+        $product->detailDescription = $request->input('detailDescription');
+        $product->brand = $request->input('brand');
+        $product->sold = 0;
+        $product->category_id = $request->input('category_id');
+        $product->save();
+
+    if ($request->hasFile('image')) {
+    foreach ($product->productImages as $oldImage) {
+        $oldImagePath = public_path('assets/image/product_image/' . $oldImage->imageURL);
+        if (file_exists($oldImagePath)) {
+            unlink($oldImagePath); 
+        }
+        $oldImage->delete(); 
+    }
+    foreach ($request->file('image') as $index => $file) {
+        $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('assets/image/product_image'), $fileName); 
+        $productImage = new ProductImage();
+        $productImage->product_id = $product->id;
+        $productImage->imageURL = $fileName;
+        $productImage->isPrimary = ($index == 0) ? 1 : 0; 
+        $productImage->save();
+    }
+    $product->load('productImages');
+    }
+
+    return redirect()->route('admin.product.managerproduct')->with('success', "Sản phẩm id $id đã cập nhật thành công!");
     }
 }

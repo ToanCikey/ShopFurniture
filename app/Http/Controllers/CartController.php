@@ -54,7 +54,7 @@ class CartController extends Controller
         }
         // return response()->json(['message' => 'cart updated', 'cartCount' => $sum], 200);
         return response()->json([
-            'message' => 'cart updated',
+            'message' => 'Sản phẩm đã được thêm vào giỏ hàng',
             'cartCount' => $sum
         ], 200);
     }
@@ -69,28 +69,6 @@ class CartController extends Controller
             session()->flash('success', 'Product successfully deleted');
         }
     }
-    // public function updateCart(Request $request)
-    // {
-    //     $product_id = $request->product_id;
-    //     $quality = $request->quality;
-
-    //     $product = Product::find($product_id);
-    //     if ($product == null) {
-    //         return response()->json([
-    //             'error' => "San pham khong tim thay"
-    //         ], 404);
-    //     }
-    //     $cart = session()->get('cart', []);
-    //     if (isset($cart[$product_id])) {
-    //         $cart[$product_id]['quality'] = $quality;
-    //     }
-    //     session()->put('cart', $cart);
-    //     $sum = 0;
-    //     foreach ($cart as $item) {
-    //         $sum += $item['quality'];
-    //     }
-    //     return response()->json(['message' => 'cart updated', 'cartCount' => $sum], 200);
-    // }
     public function updateCart(Request $request)
     {
         $product_id = $request->product_id;

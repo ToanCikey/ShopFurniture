@@ -102,6 +102,7 @@ class OrderController extends Controller
         $returnUrl = "http://localhost:8002/orderAlter";
         $notifyurl = "http://localhost:8000/atm/ipn_momo.php";
         $bankCode = "SML";
+        $failUrl = "http://localhost:8002/cart";
 
 
         $requestId = time() . "";
@@ -120,6 +121,7 @@ class OrderController extends Controller
             'notifyUrl' => $notifyurl,
             'extraData' => $extraData,
             'requestType' => $requestType
+
         );
         // echo $serectkey;die;
         $rawHash = "partnerCode=" . $partnerCode . "&accessKey=" . $accessKey . "&requestId=" . $requestId . "&bankCode=" . $bankCode . "&amount=" . $amount . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&returnUrl=" . $returnUrl . "&notifyUrl=" . $notifyurl . "&extraData=" . $extraData . "&requestType=" . $requestType;
@@ -147,7 +149,7 @@ class OrderController extends Controller
         if (isset($jsonResult['payUrl']) && filter_var($jsonResult['payUrl'], FILTER_VALIDATE_URL)) {
             return redirect($jsonResult['payUrl']); // Chuyển hướng đến trang thanh toán của MOMO
         } else {
-            return redirect()->route('order.success')->withErrors(['message' => 'Lỗi khi tạo yêu cầu thanh toán MOMO.']);
+            return redirect($failUrl)->withErrors(['message' => 'Lỗi khi tạo yêu cầu thanh toán MOMO.']);
         }
     }
 }

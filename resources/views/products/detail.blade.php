@@ -29,8 +29,11 @@
                 <div class="details">
                     <p><strong>Thương hiệu:</strong> {{ $product->brand }}</p>
                     <p><strong>Số lượng:</strong> {{ $product->quantity }}</p>
-                    <p><strong>Số lượng đã bán:</strong> {{ $product->sold }}</p>
+                    <p><strong>Đã bán:</strong> {{ $product->sold }}</p>
                     <p><strong>Chất liệu:</strong> {{ $product->material }}</p>
+                </div>
+                <div class="description">
+                    {{ $product->detailDescription}}
                 </div>
                 <div class="buttons">
                     <button class="add-to-cart" type="button" data-id="{{ $product->id }}" data-quality="1">
@@ -38,9 +41,6 @@
                     </button>
                 </div>
 
-                <div class="description">
-                    {{ $product->detailDescription}}
-                </div>
             </div>
         </div>
         <div class="related-products mt-5">

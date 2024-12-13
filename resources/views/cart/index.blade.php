@@ -33,7 +33,7 @@ Cart
             <div class="row d-flex">
                 <div class="book">
                     @if(isset($item['image']))
-                    <img src="{{$item['image']}}" class="book-img">
+                    <img src="{{'assets/image/product_image/' . $item['image']}}" class="book-img">
                     @else
                     <img src="/assets/image/card4.png" class="book-img">
                     @endif

@@ -54,13 +54,11 @@ class OrderController extends Controller
         $payment->save();
 
         // Xóa giỏ hàng
-        session()->forget('cart');
+
         if ($request->input('paymentMethod') === 'momo') {
             return $this->momo_payment($request);
         }
-        if ($request->input('paymentMethod') === 'vnpay') {
-            return $this->vnpay_payment($request);
-        }
+        session()->forget('cart');
         // Chuyển hướng đến trang đơn hàng
         return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
     }
@@ -99,10 +97,11 @@ class OrderController extends Controller
         $orderInfo = "Thanh toán qua MoMo";
         $amount = $request->input('totalPrice');
         $orderId = time() . "";
-        $returnUrl = "http://localhost:8002/orderAlter";
-        $notifyurl = "http://localhost:8000/atm/ipn_momo.php";
+        $returnUrl = "http://localhost:8000/cart";
+        // $notifyurl = "http://localhost:8000/atm/ipn_momo.php";
+        $notifyurl = "http://localhost:8000";
         $bankCode = "SML";
-        $failUrl = "http://localhost:8002/cart";
+        $failUrl = "http://localhost:8000/cart";
 
 
         $requestId = time() . "";
@@ -139,7 +138,8 @@ class OrderController extends Controller
             'notifyUrl' => $notifyurl,
             'extraData' => $extraData,
             'requestType' => $requestType,
-            'signature' => $signature
+            'signature' => $signature,
+            'failUrl' => $failUrl,
         );
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true);  // decode json
@@ -149,7 +149,7 @@ class OrderController extends Controller
         if (isset($jsonResult['payUrl']) && filter_var($jsonResult['payUrl'], FILTER_VALIDATE_URL)) {
             return redirect($jsonResult['payUrl']); // Chuyển hướng đến trang thanh toán của MOMO
         } else {
-            return redirect($failUrl)->withErrors(['message' => 'Lỗi khi tạo yêu cầu thanh toán MOMO.']);
+            return redirect()->route('cart.index')->withErrors(['message' => 'Lỗi khi tạo yêu cầu thanh toán MOMO.']);
         }
     }
 }

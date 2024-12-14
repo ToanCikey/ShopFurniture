@@ -109,20 +109,20 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('products.show', compact('products', 'categories'));
     }
-    public function show($id)
-    {
-        Log::info('Fetching product with id: ' . $id);
-        $product = Product::find($id);
-        if (!$product) {
-            Log::error('Product not found with id: ' . $id);
-            return response()->json(['message' => 'Product not found'], 404);
-        }
-        echo $product;
-        Log::info('Product found: ', $product->toArray());
-        return response()->json($product);
-    }
-    public function images()
-    {
-        return $this->hasMany(ProductImage::class, 'product_id');
-    }
+    // public function show($id)
+    // {
+    //     Log::info('Fetching product with id: ' . $id);
+    //     $product = Product::find($id);
+    //     if (!$product) {
+    //         Log::error('Product not found with id: ' . $id);
+    //         return response()->json(['message' => 'Product not found'], 404);
+    //     }
+    //     echo $product;
+    //     Log::info('Product found: ', $product->toArray());
+    //     return response()->json($product);
+    // }
+    // public function images()
+    // {
+    //     return $this->hasMany(ProductImage::class, 'product_id');
+    // }
 }

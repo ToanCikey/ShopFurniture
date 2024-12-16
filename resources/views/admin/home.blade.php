@@ -24,8 +24,8 @@
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">Visitors</p>
-                                        <h4 class="card-title">1,294</h4>
+                                        <p class="card-category">Users</p>
+                                        <h4 class="card-title">{{ $totalUsers }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -43,8 +43,8 @@
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">Subscribers</p>
-                                        <h4 class="card-title">1303</h4>
+                                        <p class="card-category">Products</p>
+                                        <h4 class="card-title">{{ $totalProducts }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -62,8 +62,8 @@
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">Sales</p>
-                                        <h4 class="card-title">$ 1,345</h4>
+                                        <p class="card-category">Blogs</p>
+                                        <h4 class="card-title">{{ $totalBlogs }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -81,8 +81,8 @@
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">Order</p>
-                                        <h4 class="card-title">576</h4>
+                                        <p class="card-category">Orders</p>
+                                        <h4 class="card-title">{{ $totalOrders }}</h4>
                                     </div>
                                 </div>
                             </div>

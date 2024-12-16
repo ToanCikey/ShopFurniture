@@ -6,11 +6,17 @@
                 <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                 <li class="breadcrumb-item active">Products</li>
             </ol>
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
             @endif
+
             <a class="btn btn-success" href="{{ route('admin.product.managerproduct.create') }}">Thêm Product</a>
             <table class="table table-hover table-bordered mt-3">
                 <thead>

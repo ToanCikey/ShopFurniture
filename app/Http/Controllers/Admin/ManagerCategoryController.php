@@ -41,14 +41,22 @@ class ManagerCategoryController extends Controller
     return redirect()->route('admin.category.managercategory')->with('success', 'Danh mục đã được thêm thành công!');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+{
     $category = Category::findOrFail($id);
+    if ($category->products()->count() > 0) {
+        return redirect()->route('admin.category.managercategory')
+            ->with('error', 'Không thể xóa danh mục vì còn sản phẩm liên quan!');
+    }
     if ($category->image && file_exists(public_path('assets/image/categoris/' . $category->image))) {
         unlink(public_path('assets/image/categoris/' . $category->image));
     }
+
     $category->delete();
-    return redirect()->route('admin.category.managercategory')->with('success', 'Danh mục đã được xóa thành công!');
-    }
+    return redirect()->route('admin.category.managercategory')
+        ->with('success', 'Danh mục đã được xóa thành công!');
+}
+
 
     public function edit($id){
         $category = Category::find($id);

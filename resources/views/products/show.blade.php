@@ -54,8 +54,8 @@ Product
                     </div>
                     <div class="form-check"> <input class="form-check-input" type="checkbox" name="price_ranges[]"
                             value="0-1000000" id="price_0_1000000"
-                            {{ in_array('0-1000000', request('price_ranges', [])) ? 'checked' : '' }}> <label
-                            class="form-check-label" for="price_0_1000000">Dưới 1 triệu VND</label> </div>
+                            {{ in_array('0-1000000', requestx)) ? 'checked' : '' }}> <label class="form-check-label"
+                            for="price_0_1000000">Dưới 1 triệu VND</label> </div>
                     <div class="form-check"> <input class="form-check-input" type="checkbox" name="price_ranges[]"
                             value="1000000-5000000" id="price_1000000_5000000"
                             {{ in_array('1000000-5000000', request('price_ranges', [])) ? 'checked' : '' }}> <label
@@ -126,34 +126,34 @@ Product
 @endsection
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Lấy tất cả các nút "Add to Cart"
-        const all_addtocart = document.querySelectorAll('.add-to-cart');
-        // Duyệt qua từng nút
-        all_addtocart.forEach(bt => {
-            bt.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                axios.post("{{ route('add-product-cart') }}", {
-                        product_id: bt.dataset.id,
-                        quality: bt.dataset.quality
-                    })
-                    .then(response => {
-                        // Hiển thị thông tin giỏ hàng sau khi thêm thành công
-                        console.log('Sản phẩm đã được thêm vào giỏ:', response.data);
-                        // Cập nhật số lượng sản phẩm trong giỏ hàng
-                        const cartCountElement = document.querySelector('#tongsoluong');
-                        if (cartCountElement) {
-                            cartCountElement.innerText = response.data.cartCount;
-                        }
-                    })
-                    .catch(error => {
-                        // Xử lý lỗi khi thêm sản phẩm vào giỏ hàng
-                        console.error('Lỗi khi thêm vào giỏ hàng:', error.response ? error
-                            .response.data : error.message);
-                    });
-            });
+document.addEventListener('DOMContentLoaded', () => {
+    // Lấy tất cả các nút "Add to Cart"
+    const all_addtocart = document.querySelectorAll('.add-to-cart');
+    // Duyệt qua từng nút
+    all_addtocart.forEach(bt => {
+        bt.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            axios.post("{{ route('add-product-cart') }}", {
+                    product_id: bt.dataset.id,
+                    quality: bt.dataset.quality
+                })
+                .then(response => {
+                    // Hiển thị thông tin giỏ hàng sau khi thêm thành công
+                    console.log('Sản phẩm đã được thêm vào giỏ:', response.data);
+                    // Cập nhật số lượng sản phẩm trong giỏ hàng
+                    const cartCountElement = document.querySelector('#tongsoluong');
+                    if (cartCountElement) {
+                        cartCountElement.innerText = response.data.cartCount;
+                    }
+                })
+                .catch(error => {
+                    // Xử lý lỗi khi thêm sản phẩm vào giỏ hàng
+                    console.error('Lỗi khi thêm vào giỏ hàng:', error.response ? error
+                        .response.data : error.message);
+                });
         });
     });
+});
 </script>
 @endpush

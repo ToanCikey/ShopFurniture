@@ -46,8 +46,8 @@ class ManagerProductController extends Controller
 
     public function store(Request $request){
         $request->validate([
-        'name' => 'required',
-        'price' => 'required|numeric',
+        'name' => 'required|unique:product,name',
+        'price' => 'required|numeric|min:0',
         'quantity' => 'required|integer',
         'shortDescription' => 'required',
         'detailDescription' => 'required',
@@ -56,8 +56,10 @@ class ManagerProductController extends Controller
         'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
         'name.required' => 'Vui lòng nhập tên sản phẩm',
+        'name.unique' => 'Vui lòng nhập tên khác vì đã có sản phẩm có tên này',
         'price.required' => 'Vui lòng nhập giá sản phẩm',
         'price.numeric' => 'Giá phải là một số',
+        'price.min' => 'Giá phải lớn hơn 0',
         'quantity.required' => 'Vui lòng nhập số lượng',
         'quantity.integer' => 'Số lượng phải là một số nguyên',
         'shortDescription.required' => 'Vui lòng nhập mô tả ngắn',
@@ -107,7 +109,7 @@ class ManagerProductController extends Controller
     public function update(Request $request,$id){
         $request->validate([
         'name' => 'required',
-        'price' => 'required|numeric',
+        'price' => 'required|numeric|min:0',
         'quantity' => 'required|integer',
         'shortDescription' => 'required',
         'detailDescription' => 'required',
@@ -118,6 +120,7 @@ class ManagerProductController extends Controller
         'name.required' => 'Vui lòng nhập tên sản phẩm',
         'price.required' => 'Vui lòng nhập giá sản phẩm',
         'price.numeric' => 'Giá phải là một số',
+        'price.min' => 'Giá phải lớn hơn 0',
         'quantity.required' => 'Vui lòng nhập số lượng',
         'quantity.integer' => 'Số lượng phải là một số nguyên',
         'shortDescription.required' => 'Vui lòng nhập mô tả ngắn',

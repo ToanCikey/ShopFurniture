@@ -42,7 +42,7 @@ class ManagerCategoryController extends Controller
     }
 
     public function destroy($id)
-{
+    {
     $category = Category::findOrFail($id);
     if ($category->products()->count() > 0) {
         return redirect()->route('admin.category.managercategory')

@@ -16,6 +16,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\ManagerUserController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\GHNController;
 use App\Http\Controllers\LoginGoogleController;
 use App\Http\Controllers\LoginFacebookController;
 use App\Http\Middleware\AuthAdmin;
@@ -145,3 +146,14 @@ Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleC
 //login by fb
 Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook'])->name('auth.facebook');
 Route::get('auth/facebook/callback', [LoginFacebookController::class, 'handleFacebookCallback']);
+
+
+//ghn
+//lay ds tỉnh thành
+Route::get('/provinces', [GHNController::class, 'getProvinces']);
+//lay ds quận/huyện
+Route::get('/districts/{province_id}', [GHNController::class, 'getDistricts']);
+//lay ds phường/xã
+Route::get('/wards/{district_id}', [GHNController::class, 'getWards']);
+
+Route::post('/calculate-shipping', [GHNController::class, 'calculateShipping']);

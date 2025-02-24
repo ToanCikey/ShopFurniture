@@ -48,7 +48,7 @@ class GHNController extends Controller
     public function calculateShipping(Request $request)
 {
     // Kiểm tra dữ liệu bắt buộc
-    if ( !$request->to_district_id || !$request->to_ward_code) {
+    if (!$request->to_district_id || !$request->to_ward_code) {
         return response()->json([
             'code' => 400,
             'message' => 'Thiếu thông tin quận/huyện hoặc phường/xã.',
@@ -57,31 +57,44 @@ class GHNController extends Controller
     }
 
     $shopId = env('GHN_SHOP_ID');
-    $from_district_id = (int) env('fromDistrictId'); 
-    $from_ward_code = env('fromWardCode'); 
+    $from_district_id = (int) env('FROM_DISTRICT_ID'); 
+    $from_ward_code = env('FROM_WARD_CODE'); 
+
+    // Dữ liệu cố định cho items
+    $items = [
+        [
+            "name" => "TEST1",
+            "quantity" => 1,
+            "height" => 200,
+            "weight" => 1000,
+            "length" => 200,
+            "width" => 200
+        ]
+    ];
 
     // Gửi request đến GHN API
     $response = Http::withHeaders([
         'Token' => $this->token,
         'ShopId' => $shopId
     ])->post('https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee', [
-        "service_id" => 53320,
-        "service_type_id" => $request->service_type_id ?? null,
-        "insurance_value" => $request->insurance_value ?? 0,
-        "coupon" => $request->coupon ?? null,
         "from_district_id" => $from_district_id,
         "from_ward_code" => $from_ward_code,
-        "to_district_id" => $request->to_district_id,
-        "to_ward_code" => $request->to_ward_code,
-        "height" => $request->height ?? 50,
-        "length" => $request->length ?? 20,
-        "weight" => $request->weight ?? 200,
-        "width" => $request->width ?? 20,
+        "service_id" => 53320,
+        "to_district_id" => 1452,
+        "to_ward_code" => "21012",
+        "service_type_id" => $request->service_type_id ?? null,
+        "coupon" => $request->coupon ?? null,
+        "height" => $request->height ?? 200,
+        "length" => $request->length ?? 200,
+        "weight" => $request->weight ?? 1000,
+        "width" => $request->width ?? 200,
+        "insurance_value" => $request->total ?? 10000,
         "cod_failed_amount" => $request->cod_failed_amount ?? 2000,
-        "items" => $request->items ?? [] 
+        "items" => $items 
     ]);
 
     return response()->json($response->json());
 }
+
 
 }

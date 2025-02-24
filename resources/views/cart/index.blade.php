@@ -149,11 +149,12 @@
                                         </div>
                                         <div class="row d-flex justify-content-between px-4">
                                             <p class="mb-1 text-left">Shipping</p>
-                                            <h6 class="mb-1 text-right" id="shipping_fee">Đang tính...</h6>
+                                            <h6 class="mb-1 text-right" id="shippingFee">Đang tính...</h6>
                                         </div>
                                         <div class="row d-flex justify-content-between px-4" id="tax">
                                             <p class="mb-1 text-left">Tổng tiền</p>
-                                            <h6 class="mb-1 text-right">{{ number_format($total) }} VNĐ</h6>
+                                            <h6 name="total" class="mb-1 text-right">{{ number_format($total) }} VNĐ
+                                            </h6>
                                         </div>
                                         <button type="submit" name="redirect" class="btn-block btn-blue">
                                             <span>
@@ -324,17 +325,17 @@
             let toDistrictId = parseInt(document.getElementById("district").value);
             console.log("toDistrictId", toDistrictId);
             let toWardCode = document.getElementById("ward").value;
+            console.log("toWardCode", toWardCode);
             if (!toDistrictId) {
                 console.error("Lỗi: Quận/Huyện chưa được chọn.");
                 alert("Vui lòng chọn Quận/Huyện trước khi tính phí.");
                 return;
             }
-
             fetch("/calculate-shipping", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
                     body: JSON.stringify({
                         to_district_id: toDistrictId,
@@ -343,15 +344,17 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Phản hồi từ API GHN:", data);
-                    if (data.code === 200) {
-                        document.getElementById("shippingFee").textContent = data.data.total || "Không có dữ liệu";
+                    console.log("Phản hồi từ API GHN:", JSON.stringify(data, null, 2)); // In toàn bộ JSON
+                    if (data.code === 200 && data.data) {
+                        document.getElementById("shippingFee").textContent = data.data.total + " VNĐ";
                     } else {
-                        console.error("Lỗi tính phí:", data.code_message_value);
-                        alert("Lỗi API: " + data.code_message_value);
+                        console.error("Lỗi tính phí:", data.message);
+                        alert("Lỗi API: " + data.message);
                     }
                 })
                 .catch(error => console.error("Lỗi gọi API tính phí:", error));
+
+
         }
     </script>
 @endpush

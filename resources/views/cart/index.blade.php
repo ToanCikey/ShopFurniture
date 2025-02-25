@@ -161,7 +161,9 @@ Cart
                                         <h6 name="total" class="mb-1 text-right">{{ number_format($total) }} VNĐ
                                         </h6>
                                     </div>
-                                    <button type="submit" name="redirect" class="btn-block btn-blue">
+
+                                    <button type="submit" style="margin-left: 22px;" name="redirect"
+                                        class="btn-block btn-blue">
                                         <span>
                                             <span id="checkout">Thanh Toán</span>
                                         </span>

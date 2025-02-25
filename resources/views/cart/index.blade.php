@@ -111,6 +111,12 @@
                                         <option value="">Chọn phường/xã</option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="service_id">Dịch vụ vận chuyển</label>
+                                    <select id="service_id" name="service_id" class="form-control" required>
+                                        <option value="">Chọn dịch vụ</option>
+                                    </select>
+                                </div>
                                 <input type="hidden" name="totalPrice" value="{{ $total }}">
                                 <div style="display: flex; justify-content: space-between;">
 
@@ -234,9 +240,13 @@
             document.getElementById("district").addEventListener("change", function() {
                 let districtId = this.value;
                 loadWards(districtId);
+                getServiceId();
+            });
+            document.getElementById("service_id").addEventListener("change", function() {
+                calculateShippingFee();
             });
             document.getElementById("ward").addEventListener("change", function() {
-                calculateShippingFee();
+
             });
         });
 
@@ -321,11 +331,47 @@
                 .catch(error => console.error("Lỗi khi load phường/xã:", error));
         }
 
+        function getServiceId() {
+            let toDistrictId = parseInt(document.getElementById("district").value);
+            console.log("toDistrictId", toDistrictId);
+            fetch('/serviceid', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        to_district_id: toDistrictId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Dữ liệu dịch vụ vận chuyển:", data); // Kiểm tra dữ liệu trả về
+                    let serviceSelect = document.getElementById("service_id");
+                    serviceSelect.innerHTML = "";
+
+                    if (data.data) {
+                        data.data.forEach(service => {
+                            let option = document.createElement("option");
+                            option.value = service.service_id;
+                            option.textContent = service.short_name;
+                            serviceSelect.appendChild(option);
+                        });
+                    }
+                })
+                .catch(error => console.error("Lỗi lấy dịch vụ:", error));
+
+        };
+
+
+        const productTotal = <?php echo json_encode($total); ?>;
+
         function calculateShippingFee() {
             let toDistrictId = parseInt(document.getElementById("district").value);
             console.log("toDistrictId", toDistrictId);
             let toWardCode = document.getElementById("ward").value;
             console.log("toWardCode", toWardCode);
+            let serviceId = document.getElementById("service_id").value;
             if (!toDistrictId) {
                 console.error("Lỗi: Quận/Huyện chưa được chọn.");
                 alert("Vui lòng chọn Quận/Huyện trước khi tính phí.");
@@ -338,6 +384,7 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
                     body: JSON.stringify({
+                        service_id: serviceId,
                         to_district_id: toDistrictId,
                         to_ward_code: toWardCode
                     })
@@ -346,15 +393,19 @@
                 .then(data => {
                     console.log("Phản hồi từ API GHN:", JSON.stringify(data, null, 2)); // In toàn bộ JSON
                     if (data.code === 200 && data.data) {
-                        document.getElementById("shippingFee").textContent = data.data.total + " VNĐ";
+                        const shippingFee = data.data.total;
+                        document.getElementById("shippingFee").textContent = Number(data.data.total).toLocaleString(
+                            'en-US') + " VNĐ";
+                        const finalTotal = productTotal + shippingFee;
+                        document.querySelector('[name="total"]').textContent = Number(finalTotal).toLocaleString(
+                                'en-US') +
+                            " VNĐ";
                     } else {
                         console.error("Lỗi tính phí:", data.message);
                         alert("Lỗi API: " + data.message);
                     }
                 })
                 .catch(error => console.error("Lỗi gọi API tính phí:", error));
-
-
         }
     </script>
 @endpush

@@ -155,5 +155,7 @@ Route::get('/provinces', [GHNController::class, 'getProvinces']);
 Route::get('/districts/{province_id}', [GHNController::class, 'getDistricts']);
 //lay ds phường/xã
 Route::get('/wards/{district_id}', [GHNController::class, 'getWards']);
+// lay danh sach service-id
+Route::post('/serviceid', [GHNController::class, 'getAvailableServices']);
 
 Route::post('/calculate-shipping', [GHNController::class, 'calculateShipping']);

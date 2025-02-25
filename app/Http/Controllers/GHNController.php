@@ -45,6 +45,19 @@ class GHNController extends Controller
         return response()->json($response->json());
     }
 
+    public function getAvailableServices(Request $request)
+{
+    $response = Http::withHeaders([
+        'Token' => $this->token
+    ])->post('https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services', [
+        'shop_id' => (int) env('GHN_SHOP_ID'),
+        "from_district" => (int) env('FROM_DISTRICT_ID'),
+        "to_district" => (int) $request->to_district_id
+    ]);
+
+    return response()->json($response->json());
+}
+
     public function calculateShipping(Request $request)
 {
     // Kiểm tra dữ liệu bắt buộc
@@ -79,17 +92,17 @@ class GHNController extends Controller
     ])->post('https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee', [
         "from_district_id" => $from_district_id,
         "from_ward_code" => $from_ward_code,
-        "service_id" => 53320,
-        "to_district_id" => 1452,
-        "to_ward_code" => "21012",
+        "service_id" => (int)$request->service_id,
+        "to_district_id" => $request->to_district_id,
+        "to_ward_code" => (string) $request->to_ward_code,
         "service_type_id" => $request->service_type_id ?? null,
         "coupon" => $request->coupon ?? null,
-        "height" => $request->height ?? 200,
-        "length" => $request->length ?? 200,
+        "height" => $request->height ?? 20,
+        "length" => $request->length ?? 20,
         "weight" => $request->weight ?? 1000,
-        "width" => $request->width ?? 200,
-        "insurance_value" => $request->total ?? 10000,
-        "cod_failed_amount" => $request->cod_failed_amount ?? 2000,
+        "width" => $request->width ?? 20,
+        "insurance_value" => $request->total ?? 0,
+        "cod_failed_amount" => $request->cod_failed_amount ?? 0,
         "items" => $items 
     ]);
 

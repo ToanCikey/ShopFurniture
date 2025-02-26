@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class GHNController extends Controller
 {
@@ -180,7 +181,7 @@ class GHNController extends Controller
         "to_address" => $request->receiver_address,
         "to_ward_code" => (string) $request->to_ward_code,
         "to_district_id" => $request->to_district_id,
-        "cod_amount" => $request->total_amount,
+        "cod_amount" => (int) $request->total_amount,
         "content" => "",
         "height" => $totalHeight,
         "length" => $totalLength,
@@ -188,7 +189,7 @@ class GHNController extends Controller
         "width" => $totalWidth,
         "pick_station_id" => null,
         "deliver_station_id" => null,
-        "insurance_value" => min($request->total_amount, 5000000),
+        "insurance_value" => (int) min($request->total_amount, 5000000),
         "service_id" => (int)$request->service_id,
         "service_type_id" => 2,
         "coupon" => null,

@@ -73,7 +73,7 @@
                     <div class="row">
                         <div class="col-lg-12" style="padding: 30px;">
                             <h5>Thông Tin Người Nhận</h5>
-                            <form action="{{ route('checkout') }}" method="POST">
+                            <form id="checkout-form" action="{{ route('checkout') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="receiverName">Tên Người Nhận</label>
@@ -163,7 +163,8 @@
                                             </h6>
                                         </div>
 
-                                        <button type="submit" style="margin-left: 22px;" class="btn-block btn-blue">
+                                        <button type="button" style="margin-left: 22px;" class="btn-block btn-blue"
+                                            onclick="createOrder()">
                                             <span>
                                                 <span id="checkout">Thanh Toán</span>
                                             </span>
@@ -236,10 +237,16 @@
             document.getElementById("ward").addEventListener("change", function() {
                 calculateShippingFee();
             });
-            document.querySelector("form").addEventListener("submit", function(event) {
-                event.preventDefault();
-                createOrder();
+            document.addEventListener("DOMContentLoaded", function() {
+                const checkoutForm = document.querySelector("#checkout-form"); // Định danh form
+                if (checkoutForm) {
+                    checkoutForm.addEventListener("submit", function(event) {
+                        event.preventDefault(); // Ngăn form gửi dữ liệu ngay lập tức
+                        createOrder();
+                    });
+                }
             });
+
 
         });
 
@@ -404,7 +411,9 @@
             let receiverName = document.getElementById("receiverName").value;
             let receiverPhone = document.getElementById("receiverPhone").value;
             let receiverAddress = document.getElementById("receiverAddress").value;
-            let totalAmount = parseFloat(document.querySelector('[name="total"]').value) || 0; // Đảm bảo đúng name
+            let totalText = document.querySelector('h6[name="total"]').innerText;
+            let totalValue = totalText.replace(/\D/g, '');
+            console.log(totalValue);
 
             if (!toDistrictId || !toWardCode || !serviceId || !receiverName || !receiverPhone || !receiverAddress) {
                 alert("Vui lòng nhập đầy đủ thông tin trước khi đặt hàng!");
@@ -418,7 +427,7 @@
                 to_district_id: toDistrictId,
                 to_ward_code: toWardCode,
                 service_id: serviceId,
-                total_amount: totalAmount
+                total_amount: totalValue
             };
 
             console.log("Dữ liệu gửi lên API:", requestData); // Debug dữ liệu gửi đi
@@ -432,15 +441,17 @@
                     body: JSON.stringify(requestData)
                 })
                 .then(response => {
-                    console.log("Trạng thái response:", response.status); // Kiểm tra HTTP Status
+                    console.log("Trạng thái response:", response.status);
                     return response.json();
                 })
                 .then(data => {
-                    console.log("Dữ liệu trả về từ API:", data); // Log dữ liệu API trả về
+                    console.log("Dữ liệu trả về từ API:", data);
                     if (data.success) {
+                        localStorage.setItem('order_code', data.data.order_code);
                         alert("Đặt hàng thành công!");
-                        document.querySelector("form").submit();
+                        window.location.href = "/orderAlter";
                     } else {
+                        console.log("Dữ liệu trả về từ API:", data);
                         alert("Có lỗi xảy ra: " + (data.message || "Lỗi không xác định"));
                     }
                 })

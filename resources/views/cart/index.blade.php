@@ -195,19 +195,6 @@
                     })
             });
         });
-
-        // const inputQuality = document.querySelectorAll('.quality');
-        // inputQuality.forEach(inp => {
-        //     inp.addEventListener('change', (e) => {
-        //         axios.post("{{ route('update-product-cart') }}", {
-        //                 product_id: inp.dataset.product,
-        //                 quality: e.target.value
-        //             })
-        //             .then(res => {
-        //                 window.location.reload();
-        //             });
-        //     });
-        // });
         const inputQuality = document.querySelectorAll('.quality');
         inputQuality.forEach(inp => {
             inp.addEventListener('change', (e) => {
@@ -250,13 +237,18 @@
             document.getElementById("ward").addEventListener("change", function() {
                 calculateShippingFee();
             });
+            document.querySelector("form").addEventListener("submit", function(event) {
+                event.preventDefault();
+                createOrder();
+            });
+
         });
 
         function loadProvinces() {
             fetch("/provinces")
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Dữ liệu API:", data); // Kiểm tra dữ liệu trả về
+                    console.log("Dữ liệu API:", data);
 
                     let provinceSelect = document.getElementById("province");
                     provinceSelect.innerHTML = '<option value="">Chọn tỉnh/thành phố</option>';
@@ -404,6 +396,58 @@
                     }
                 })
                 .catch(error => console.error("Lỗi khi tính phí vận chuyển:", error));
+        }
+
+        function createOrder() {
+            let toDistrictId = parseInt(document.getElementById("district").value);
+            let toWardCode = document.getElementById("ward").value;
+            let serviceId = parseInt(document.getElementById("service_id").value);
+            let receiverName = document.getElementById("receiverName").value;
+            let receiverPhone = document.getElementById("receiverPhone").value;
+            let receiverAddress = document.getElementById("receiverAddress").value;
+            let totalAmount = parseFloat(document.querySelector('[name="totalPrice"]').value) || 0; // Đảm bảo đúng name
+
+            if (!toDistrictId || !toWardCode || !serviceId || !receiverName || !receiverPhone || !receiverAddress) {
+                alert("Vui lòng nhập đầy đủ thông tin trước khi đặt hàng!");
+                return;
+            }
+
+            let requestData = {
+                receiver_name: receiverName,
+                receiver_phone: receiverPhone,
+                receiver_address: receiverAddress,
+                to_district_id: toDistrictId,
+                to_ward_code: toWardCode,
+                service_id: serviceId,
+                total_amount: totalAmount
+            };
+
+            console.log("Dữ liệu gửi lên API:", requestData); // Debug dữ liệu gửi đi
+
+            fetch("/create-order", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify(requestData)
+                })
+                .then(response => {
+                    console.log("Trạng thái response:", response.status); // Kiểm tra HTTP Status
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Dữ liệu trả về từ API:", data); // Log dữ liệu API trả về
+                    if (data.success) {
+                        alert("Đặt hàng thành công!");
+                        document.querySelector("form").submit();
+                    } else {
+                        alert("Có lỗi xảy ra: " + (data.message || "Lỗi không xác định"));
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi khi gọi API:", error);
+                });
         }
     </script>
 @endpush

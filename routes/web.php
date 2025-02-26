@@ -157,5 +157,7 @@ Route::get('/districts/{province_id}', [GHNController::class, 'getDistricts']);
 Route::get('/wards/{district_id}', [GHNController::class, 'getWards']);
 // lay danh sach service-id
 Route::post('/serviceid', [GHNController::class, 'getAvailableServices']);
-
+// tao don hang
+Route::post('/create_order', [GHNController::class, 'createOrder']);
+// tinh phi ship
 Route::post('/calculate-shipping', [GHNController::class, 'calculateShipping']);

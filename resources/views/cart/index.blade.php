@@ -163,12 +163,13 @@
                                             </h6>
                                         </div>
 
-                                        <button type="submit" style="margin-left: 22px;" name="redirect"
-                                            class="btn-block btn-blue">
+                                        <button type="button" name="redirect" class="btn-block btn-blue"
+                                            id="checkout-btn">
                                             <span>
                                                 <span id="checkout">Thanh Toán</span>
                                             </span>
                                         </button>
+
                                     </div>
                                 </div>
                             </form>
@@ -237,10 +238,12 @@
             document.getElementById("ward").addEventListener("change", function() {
                 calculateShippingFee();
             });
-            document.querySelector("form").addEventListener("submit", function(event) {
-                event.preventDefault();
+            document.querySelector("#checkout-btn").addEventListener("click", function() {
+                console.log("Gọi createOrder()");
                 createOrder();
             });
+
+
 
         });
 
@@ -392,6 +395,7 @@
                         document.querySelector('[name="total"]').textContent = finalTotal.toLocaleString('vi-VN') +
                             " VNĐ";
                     } else {
+                        console.log("data", data);
                         alert("Không thể lấy thông tin phí vận chuyển. Vui lòng thử lại!");
                     }
                 })
@@ -405,7 +409,7 @@
             let receiverName = document.getElementById("receiverName").value;
             let receiverPhone = document.getElementById("receiverPhone").value;
             let receiverAddress = document.getElementById("receiverAddress").value;
-            let totalAmount = parseFloat(document.querySelector('[name="totalPrice"]').value) || 0; // Đảm bảo đúng name
+            let totalAmount = parseFloat(document.querySelector('[name="total"]').value) || 0;
 
             if (!toDistrictId || !toWardCode || !serviceId || !receiverName || !receiverPhone || !receiverAddress) {
                 alert("Vui lòng nhập đầy đủ thông tin trước khi đặt hàng!");
@@ -422,9 +426,9 @@
                 total_amount: totalAmount
             };
 
-            console.log("Dữ liệu gửi lên API:", requestData); // Debug dữ liệu gửi đi
+            console.log("Dữ liệu gửi lên API:", requestData);
 
-            fetch("/create-order", {
+            fetch("/create_order", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
@@ -433,11 +437,11 @@
                     body: JSON.stringify(requestData)
                 })
                 .then(response => {
-                    console.log("Trạng thái response:", response.status); // Kiểm tra HTTP Status
+                    console.log("Trạng thái response:", response.status);
                     return response.json();
                 })
                 .then(data => {
-                    console.log("Dữ liệu trả về từ API:", data); // Log dữ liệu API trả về
+                    console.log("Dữ liệu trả về từ API:", data);
                     if (data.success) {
                         alert("Đặt hàng thành công!");
                         document.querySelector("form").submit();

@@ -163,8 +163,7 @@
                                             </h6>
                                         </div>
 
-                                        <button type="submit" style="margin-left: 22px;" name="redirect"
-                                            class="btn-block btn-blue">
+                                        <button type="submit" style="margin-left: 22px;" class="btn-block btn-blue">
                                             <span>
                                                 <span id="checkout">Thanh Toán</span>
                                             </span>
@@ -405,7 +404,7 @@
             let receiverName = document.getElementById("receiverName").value;
             let receiverPhone = document.getElementById("receiverPhone").value;
             let receiverAddress = document.getElementById("receiverAddress").value;
-            let totalAmount = parseFloat(document.querySelector('[name="totalPrice"]').value) || 0; // Đảm bảo đúng name
+            let totalAmount = parseFloat(document.querySelector('[name="total"]').value) || 0; // Đảm bảo đúng name
 
             if (!toDistrictId || !toWardCode || !serviceId || !receiverName || !receiverPhone || !receiverAddress) {
                 alert("Vui lòng nhập đầy đủ thông tin trước khi đặt hàng!");
@@ -424,7 +423,7 @@
 
             console.log("Dữ liệu gửi lên API:", requestData); // Debug dữ liệu gửi đi
 
-            fetch("/create-order", {
+            fetch("/create_order", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',

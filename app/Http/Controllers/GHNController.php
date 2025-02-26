@@ -198,7 +198,7 @@ class GHNController extends Controller
 
     $response = Http::withHeaders([
         'Token' => $this->token,
-        'ShopId' => $this->shopId
+        'shop_id' => $this->shopId
     ])->post('https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create', $payload);
 
     $responseData = $response->json();

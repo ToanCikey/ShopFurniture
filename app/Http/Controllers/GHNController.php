@@ -60,7 +60,6 @@ class GHNController extends Controller
 
     public function calculateShipping(Request $request)
 {
-    // Kiểm tra dữ liệu bắt buộc
     if (!$request->to_district_id || !$request->to_ward_code) {
         return response()->json([
             'code' => 400,
@@ -73,19 +72,39 @@ class GHNController extends Controller
     $from_district_id = (int) env('FROM_DISTRICT_ID'); 
     $from_ward_code = env('FROM_WARD_CODE'); 
 
-    // Dữ liệu cố định cho items
-    $items = [
-        [
-            "name" => "TEST1",
-            "quantity" => 1,
-            "height" => 200,
-            "weight" => 1000,
-            "length" => 200,
-            "width" => 200
-        ]
-    ];
+    $cart = session()->get('cart', []);
 
-    // Gửi request đến GHN API
+    $totalWeight = 0;
+    $totalHeight = 0;
+    $totalLength = 0;
+    $totalWidth = 0;
+    $items = [];
+
+    foreach ($cart as $product) {
+        $quantity = $product['quality'] ?? 1; 
+
+        $weight = $product['weight'] ?? 500; 
+        $height = $product['height'] ?? 10; 
+        $length = $product['length'] ?? 20;  
+        $width = $product['width'] ?? 15;    
+
+
+        $totalWeight += $weight * $quantity;
+        $totalHeight += $height * $quantity;
+        $totalLength += $length * $quantity;
+        $totalWidth += $width * $quantity;
+
+
+        $items[] = [
+            "name" => $product['name'],
+            "height" => $height,
+            "weight" => $weight,
+            "length" => $length,
+            "width" => $width
+        ];
+    }
+
+
     $response = Http::withHeaders([
         'Token' => $this->token,
         'ShopId' => $shopId
@@ -97,10 +116,10 @@ class GHNController extends Controller
         "to_ward_code" => (string) $request->to_ward_code,
         "service_type_id" => $request->service_type_id ?? null,
         "coupon" => $request->coupon ?? null,
-        "height" => $request->height ?? 20,
-        "length" => $request->length ?? 20,
-        "weight" => $request->weight ?? 1000,
-        "width" => $request->width ?? 20,
+        "height" => $totalHeight, 
+        "length" => $totalLength, 
+        "weight" => $totalWeight, 
+        "width" => $totalWidth, 
         "insurance_value" => $request->total ?? 0,
         "cod_failed_amount" => $request->cod_failed_amount ?? 0,
         "items" => $items 
@@ -108,6 +127,7 @@ class GHNController extends Controller
 
     return response()->json($response->json());
 }
+
 
 
 }

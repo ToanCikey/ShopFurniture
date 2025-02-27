@@ -117,6 +117,8 @@
                                         <option value="">Chọn dịch vụ</option>
                                     </select>
                                 </div>
+                                <input type="hidden" id="orderCode" name="orderCode">
+
                                 <input type="hidden" name="totalPrice" value="{{ $total }}">
                                 <div style="display: flex; justify-content: space-between;">
 
@@ -158,10 +160,12 @@
                                             <h6 class="mb-1 text-right" id="shippingFee">Đang tính...</h6>
                                         </div>
                                         <div class="row d-flex justify-content-between px-4" id="tax">
-                                            <p class="mb-1 text-left">Tổng tiền</p>
+                                            <p class="mb-1 text-left">Thành tiền</p>
                                             <h6 name="total" class="mb-1 text-right">{{ number_format($total) }} VNĐ
                                             </h6>
                                         </div>
+                                        <input type="hidden" id="sumPrice" name="sumPrice"
+                                            value="{{ $total }}">
 
                                         <button type="button" style="margin-left: 22px;" class="btn-block btn-blue"
                                             onclick="createOrder()">
@@ -241,7 +245,7 @@
                 const checkoutForm = document.querySelector("#checkout-form"); // Định danh form
                 if (checkoutForm) {
                     checkoutForm.addEventListener("submit", function(event) {
-                        event.preventDefault(); // Ngăn form gửi dữ liệu ngay lập tức
+                        event.preventDefault();
                         createOrder();
                     });
                 }
@@ -405,6 +409,8 @@
         }
 
         function createOrder() {
+            let checkoutForm = document.querySelector("#checkout-form");
+
             let toDistrictId = parseInt(document.getElementById("district").value);
             let toWardCode = document.getElementById("ward").value;
             let serviceId = parseInt(document.getElementById("service_id").value);
@@ -413,7 +419,6 @@
             let receiverAddress = document.getElementById("receiverAddress").value;
             let totalText = document.querySelector('h6[name="total"]').innerText;
             let totalValue = totalText.replace(/\D/g, '');
-            console.log(totalValue);
 
             if (!toDistrictId || !toWardCode || !serviceId || !receiverName || !receiverPhone || !receiverAddress) {
                 alert("Vui lòng nhập đầy đủ thông tin trước khi đặt hàng!");
@@ -430,7 +435,7 @@
                 total_amount: totalValue
             };
 
-            console.log("Dữ liệu gửi lên API:", requestData); // Debug dữ liệu gửi đi
+            console.log("Dữ liệu gửi lên API:", requestData);
 
             fetch("/create_order", {
                     method: "POST",
@@ -440,24 +445,28 @@
                     },
                     body: JSON.stringify(requestData)
                 })
-                .then(response => {
-                    console.log("Trạng thái response:", response.status);
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
                     console.log("Dữ liệu trả về từ API:", data);
                     if (data.success) {
-                        localStorage.setItem('order_code', data.data.order_code);
-                        alert("Đặt hàng thành công!");
-                        window.location.href = "/orderAlter";
+                        let orderCode = data.data.order_code;
+                        document.getElementById("orderCode").value = orderCode;
+                        updateSumPrice();
+                        checkoutForm.submit();
                     } else {
-                        console.log("Dữ liệu trả về từ API:", data);
                         alert("Có lỗi xảy ra: " + (data.message || "Lỗi không xác định"));
                     }
                 })
                 .catch(error => {
                     console.error("Lỗi khi gọi API:", error);
                 });
+        }
+
+        function updateSumPrice() {
+            let totalText = document.querySelector('h6[name="total"]').innerText;
+            let totalValue = totalText.replace(/\D/g, ''); // Chỉ giữ số, loại bỏ 'VNĐ'
+            document.getElementById("sumPrice").value = totalValue;
+            console.log("Thành tiền", totalValue);
         }
     </script>
 @endpush

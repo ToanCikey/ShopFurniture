@@ -27,9 +27,10 @@ class OrderController extends Controller
 
         // Tạo đơn hàng
         $order = new Order();
-        $order->totalPrice = $request->input('totalPrice'); // Tổng tiền
+        $order->totalPrice = $request->input('sumPrice'); 
         $order->ReceiverName = $request->input('receiverName');
         $order->ReceiverAddress = $request->input('receiverAddress');
+        $order->orderCode = $request->input('orderCode');
         $order->status = 'pending'; // Trạng thái đơn hàng
         $order->user_id = $userId;
         $order->save();

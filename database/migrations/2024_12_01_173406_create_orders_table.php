@@ -16,6 +16,7 @@ return new class extends Migration
             $table->decimal('totalPrice', 10, 2);
             $table->string('receiverName');
             $table->string('receiverAddress');
+            $table->string('orderCode');
             $table->string('status')->default('pending');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });

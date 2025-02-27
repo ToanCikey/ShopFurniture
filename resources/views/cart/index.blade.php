@@ -73,7 +73,7 @@
                     <div class="row">
                         <div class="col-lg-12" style="padding: 30px;">
                             <h5>Thông Tin Người Nhận</h5>
-                            <form action="{{ route('checkout') }}" method="POST">
+                            <form id="checkout-form" action="{{ route('checkout') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="receiverName">Tên Người Nhận</label>
@@ -117,6 +117,8 @@
                                         <option value="">Chọn dịch vụ</option>
                                     </select>
                                 </div>
+                                <input type="hidden" id="orderCode" name="orderCode">
+
                                 <input type="hidden" name="totalPrice" value="{{ $total }}">
                                 <div style="display: flex; justify-content: space-between;">
 
@@ -158,13 +160,20 @@
                                             <h6 class="mb-1 text-right" id="shippingFee">Đang tính...</h6>
                                         </div>
                                         <div class="row d-flex justify-content-between px-4" id="tax">
-                                            <p class="mb-1 text-left">Tổng tiền</p>
+                                            <p class="mb-1 text-left">Thành tiền</p>
                                             <h6 name="total" class="mb-1 text-right">{{ number_format($total) }} VNĐ
                                             </h6>
                                         </div>
+                                        <input type="hidden" id="sumPrice" name="sumPrice"
+                                            value="{{ $total }}">
 
+<<<<<<< HEAD
                                         <button type="button" name="redirect" class="btn-block btn-blue"
                                             id="checkout-btn">
+=======
+                                        <button type="button" style="margin-left: 22px;" class="btn-block btn-blue"
+                                            onclick="createOrder()">
+>>>>>>> 87bc4a34e50331ec6b5a5773e85e04dd84657ea9
                                             <span>
                                                 <span id="checkout">Thanh Toán</span>
                                             </span>
@@ -238,6 +247,7 @@
             document.getElementById("ward").addEventListener("change", function() {
                 calculateShippingFee();
             });
+<<<<<<< HEAD
             document.querySelector("#checkout-btn").addEventListener("click", function() {
                 console.log("Gọi createOrder()");
                 createOrder();
@@ -245,6 +255,19 @@
 
 
 
+=======
+            document.addEventListener("DOMContentLoaded", function() {
+                const checkoutForm = document.querySelector("#checkout-form"); // Định danh form
+                if (checkoutForm) {
+                    checkoutForm.addEventListener("submit", function(event) {
+                        event.preventDefault();
+                        createOrder();
+                    });
+                }
+            });
+
+
+>>>>>>> 87bc4a34e50331ec6b5a5773e85e04dd84657ea9
         });
 
         function loadProvinces() {
@@ -403,13 +426,20 @@
         }
 
         function createOrder() {
+            let checkoutForm = document.querySelector("#checkout-form");
+
             let toDistrictId = parseInt(document.getElementById("district").value);
             let toWardCode = document.getElementById("ward").value;
             let serviceId = parseInt(document.getElementById("service_id").value);
             let receiverName = document.getElementById("receiverName").value;
             let receiverPhone = document.getElementById("receiverPhone").value;
             let receiverAddress = document.getElementById("receiverAddress").value;
+<<<<<<< HEAD
             let totalAmount = parseFloat(document.querySelector('[name="total"]').value) || 0;
+=======
+            let totalText = document.querySelector('h6[name="total"]').innerText;
+            let totalValue = totalText.replace(/\D/g, '');
+>>>>>>> 87bc4a34e50331ec6b5a5773e85e04dd84657ea9
 
             if (!toDistrictId || !toWardCode || !serviceId || !receiverName || !receiverPhone || !receiverAddress) {
                 alert("Vui lòng nhập đầy đủ thông tin trước khi đặt hàng!");
@@ -423,7 +453,7 @@
                 to_district_id: toDistrictId,
                 to_ward_code: toWardCode,
                 service_id: serviceId,
-                total_amount: totalAmount
+                total_amount: totalValue
             };
 
             console.log("Dữ liệu gửi lên API:", requestData);
@@ -436,15 +466,21 @@
                     },
                     body: JSON.stringify(requestData)
                 })
+<<<<<<< HEAD
                 .then(response => {
                     console.log("Trạng thái response:", response.status);
                     return response.json();
                 })
+=======
+                .then(response => response.json())
+>>>>>>> 87bc4a34e50331ec6b5a5773e85e04dd84657ea9
                 .then(data => {
                     console.log("Dữ liệu trả về từ API:", data);
                     if (data.success) {
-                        alert("Đặt hàng thành công!");
-                        document.querySelector("form").submit();
+                        let orderCode = data.data.order_code;
+                        document.getElementById("orderCode").value = orderCode;
+                        updateSumPrice();
+                        checkoutForm.submit();
                     } else {
                         alert("Có lỗi xảy ra: " + (data.message || "Lỗi không xác định"));
                     }
@@ -452,6 +488,13 @@
                 .catch(error => {
                     console.error("Lỗi khi gọi API:", error);
                 });
+        }
+
+        function updateSumPrice() {
+            let totalText = document.querySelector('h6[name="total"]').innerText;
+            let totalValue = totalText.replace(/\D/g, ''); // Chỉ giữ số, loại bỏ 'VNĐ'
+            document.getElementById("sumPrice").value = totalValue;
+            console.log("Thành tiền", totalValue);
         }
     </script>
 @endpush

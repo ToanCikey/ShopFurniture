@@ -21,7 +21,7 @@ use App\Http\Controllers\LoginGoogleController;
 use App\Http\Controllers\LoginFacebookController;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\CheckUserRole;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -161,3 +161,32 @@ Route::post('/serviceid', [GHNController::class, 'getAvailableServices']);
 Route::post('/create_order', [GHNController::class, 'createOrder']);
 // tinh phi ship
 Route::post('/calculate-shipping', [GHNController::class, 'calculateShipping']);
+//Trạng thái đơn hàng
+// Route::get('/api/order-status/{orderId}', function ($orderId) {
+//     $token = env('GHN_API_KEY');
+
+//     $response = Http::withHeaders([
+//         'Token' => $token
+//     ])->post('https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/detail', [
+//         'order_code' => $orderId
+//     ]);
+
+//     $data = $response->json();
+
+//     if ($response->successful() && isset($data['data']['status'])) {
+//         return response()->json([
+//             'success' => true,
+//             'status' => $data['data']['status']
+//         ]);
+//     } else {
+//         return response()->json([
+//             'success' => false,
+//             'message' => 'Không lấy được trạng thái đơn hàng'
+//         ], 400);
+//     }
+// });
+
+
+Route::get('/api/order-status/{orderCode}', [GHNController::class, 'getOrderStatus']);
+//Huỷ đơn hàng
+Route::post('/api/cancel-order/{orderCode}', [GHNController::class, 'cancelOrder']);

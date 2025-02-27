@@ -14,6 +14,7 @@ class Order extends Model
         'receiverName',
         'receiverAddress',
         'status',
+        'orderCode',
         'user_id'
     ];
 
